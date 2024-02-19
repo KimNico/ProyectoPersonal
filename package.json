@@ -1,0 +1,22 @@
+{
+  "name": "proyectopersonal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KimNico/ProyectoPersonal.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KimNico/ProyectoPersonal/issues"
+  },
+  "homepage": "https://github.com/KimNico/ProyectoPersonal#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
