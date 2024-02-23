@@ -2,9 +2,9 @@ const { DataTypes, DATE } = require("sequelize");
 
 module.exports = (sequelize) =>{
     sequelize.define(
-        "user",
+        "User",
         {
-            id:{
+            id_user:{
                 type: DataTypes.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
@@ -26,13 +26,9 @@ module.exports = (sequelize) =>{
                 allowNull:false,
                 unique:true,
             },
-            foto:{
-                type: DataTypes.STRING(500),
-                allowNull: true,
-            },
-            cv:{
-                type: DataTypes.STRING,
-                allowNull:true,
+            tipo:{
+                type: DataTypes.ENUM('solicitante', 'empleador'),
+                allowNull: false,
             }
         }
     )
