@@ -39,10 +39,10 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { User , Empresa, Postulacion, Categoria, Publicacion} = sequelize.models
+const { User , Empresa, Aplicacion, Categoria, Publicacion} = sequelize.models
 
-User.hasMany(Postulacion, { foreignKey: 'id_user' });
-Postulacion.belongsTo(User, { foreignKey: 'id_user' });
+User.hasMany(Aplicacion, { foreignKey: 'id_user' });
+Aplicacion.belongsTo(User, { foreignKey: 'id_user' });
 
 Empresa.hasMany(Publicacion, { foreignKey: 'id_empresa' });
 Publicacion.belongsTo(Empresa, { foreignKey: 'id_empresa' });
