@@ -1,13 +1,13 @@
 const {Router} = require("express")
 
-const publicacion = Router()
+const publicacionRoute = Router()
 
-postulacionRoute.post('/')
-postulacionRoute.put('/')
-postulacionRoute.get('/')
-postulacionRoute.delete('/')
-postulacionRoute.get('/:id')
+publicacionRoute.post('/')
+publicacionRoute.put('/')
+publicacionRoute.get('/')
+publicacionRoute.delete('/')
+publicacionRoute.get('/:id')
 
 
-module.exports = postulacionRoute;
+module.exports = publicacionRoute;
 

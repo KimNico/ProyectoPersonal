@@ -1,13 +1,15 @@
 const {Router} = require("express")
 
-const route = Router()
+const router = Router()
 
 const aplicacionRoute = require('./AplicacionRoute')
 const categoriaRoute = require('./CategoriaRoute')
 const empresaroute = require('./EmpresaRoute')
 const publicacionroute = require ('./PublicacionRoute')
 
-route.use('/aplicacion',aplicacionRoute)
-route.use('/categoria',categoriaRoute)
-route.use('/empresa',empresaroute)
-route.use('/publicacion',publicacionroute)
+router.use('/aplicacion',aplicacionRoute)
+router.use('/categoria',categoriaRoute)
+router.use('/empresa',empresaroute)
+router.use('/publicacion',publicacionroute)
+
+module.exports = router;
