@@ -1,20 +1,51 @@
-const express = require('express');
-const app = express();
+const express = require("express");
+const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
+const morgan = require("morgan");
+const routes = require("./routes/index.js");
+const cors = require("cors");
+require("dotenv").config();
+const { ACCESS1 } = process.env;
+
 require("./db.js");
 
-app.get('/', (req, res) => {
-    res.send('Hello, World!');
+const server = express();
+// Configurar CORS
+
+server.name = "API";
+
+server.use((req, res, next) => {
+  cors({
+    origin: [ACCESS1].find((e) => e === req.headers.origin), // VERIFICAR ORIGEN DE PEDIDO
+    methods: "GET,POST,PUT,DELETE",
+    allowedHeaders: "Content-Type, Authorization, x-access-token",
+  });
+  next();
+});
+server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
+server.use(bodyParser.json({ limit: "50mb" }));
+server.use(cookieParser());
+server.use(morgan("dev"));
+server.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", req.headers.origin); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+  next();
 });
 
-app.listen(3001, () => {
-    console.log('Server is running on http://localhost:3001');
+server.use("/", routes);
+
+// Error catching endware.
+server.use((err, req, res, next) => {
+  // eslint-disable-line no-unused-vars
+  const status = err.status || 500;
+  const message = err.message || err;
+  console.error(err);
+  res.status(status).send(message);
 });
 
-// Define tus modelos aquí (ver la documentación de Sequelize para más detalles)
-
-// Sincronizar modelos con la base de datos
-sequelize.sync({ force: true }).then(() => {
-  console.log('Modelos sincronizados correctamente con la base de datos.');
-}).catch((error) => {
-  console.error('Error al sincronizar modelos con la base de datos:', error);
-});
+module.exports = server;
