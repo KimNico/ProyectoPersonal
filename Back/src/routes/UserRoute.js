@@ -1,12 +1,12 @@
 const {Router} = require("express")
-const {getUsersController , getUserByIDController} = require("../controllers/UserController")
+const {getUsersController , getUserByIDController, deleteUserController} = require("../controllers/UserController")
 
 const userRoute = Router()
 
 userRoute.post('/')
 userRoute.put('/')
 userRoute.get('/',getUsersController)
-userRoute.delete('/')
+userRoute.delete('/:id',deleteUserController)
 userRoute.get('/:id',getUserByIDController)
 
 

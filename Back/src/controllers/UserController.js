@@ -37,4 +37,30 @@ const getUsersController =  (req,res) => {
         }
     });
 };
-  module.exports= {getUsersController, getUserByIDController}
+
+const deleteUserController = (req,res)=>{
+    fs.readFile('users.json', 'utf8', (err, data) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send('Error reading file');
+            return;
+        }
+        try {
+            const {id} = req.params
+            const jsonData = JSON.parse(data)
+            let userById = jsonData.filter(e=>e.id == id)
+                if(userById.length){
+                    delete(userById)
+                    res.json('Usuer deleted')
+                }else{
+                    res.status(404).send('User not found')
+                }
+        } catch (error) {
+            res.status(500).send('Error processing request');
+
+        }
+    })
+    }
+
+
+  module.exports= {getUsersController, getUserByIDController,deleteUserController}
