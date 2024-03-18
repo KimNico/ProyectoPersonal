@@ -1,5 +1,5 @@
 const {Router} = require("express")
-const {getUsersController} = require("../controllers/UserController")
+const {getUsersController , getUserByIDController} = require("../controllers/UserController")
 
 const userRoute = Router()
 
@@ -7,7 +7,7 @@ userRoute.post('/')
 userRoute.put('/')
 userRoute.get('/',getUsersController)
 userRoute.delete('/')
-userRoute.get('/:id')
+userRoute.get('/:id',getUserByIDController)
 
 
 module.exports = userRoute;
