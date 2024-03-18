@@ -1,7 +1,7 @@
 
 const fs =require('fs')
-const getPublicacionesController = async (req,res) => {
-    fs.readFile('publicaciones.json', 'utf8', async (err, data) => {
+const getUsersController = async (req,res) => {
+    fs.readFile('users.json', 'utf8', async (err, data) => {
         if (err) {
             console.error(err);
             res.status(500).send('Error reading file');
@@ -17,10 +17,4 @@ const getPublicacionesController = async (req,res) => {
         }
     });
   }
-
-
-  const postPublicacionController = async(req,res)=>{
-    const { titulo, descripcion, ubicaion, salario} = req.body
-    
-  }
-  module.exports = {getPublicacionesController}
+  module.exports= {getUsersController}

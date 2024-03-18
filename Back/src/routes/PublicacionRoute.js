@@ -4,9 +4,9 @@ const {getPublicacionesController} = require("../controllers/PublicacionControll
 const publicacionRoute = Router()
 
 publicacionRoute.post('/')
-publicacionRoute.put('/')
+publicacionRoute.put('/"id')
 publicacionRoute.get('/',getPublicacionesController)
-publicacionRoute.delete('/')
+publicacionRoute.delete('/:id')
 publicacionRoute.get('/:id')
 
 

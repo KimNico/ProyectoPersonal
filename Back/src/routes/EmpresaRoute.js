@@ -3,9 +3,9 @@ const {Router} = require("express")
 const empresaRoute = Router()
 
 empresaRoute.post('/')
-empresaRoute.put('/')
+empresaRoute.put('/"id')
 empresaRoute.get('/')
-empresaRoute.delete('/')
+empresaRoute.delete('/:id')
 empresaRoute.get('/:id')
 
 
