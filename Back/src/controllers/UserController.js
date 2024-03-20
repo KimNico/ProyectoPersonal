@@ -75,8 +75,9 @@ const postUserController = (req, res) => {
             return;
         }
         try {
-            const {id, nombre, apellido, pw, mail, tipo } = req.body
+            const { nombre, apellido, pw, mail, tipo } = req.body
             const jsonData = JSON.parse(data);
+            let id = jsonData.length > 0 ? jsonData[jsonData.length - 1].id + 1 : 1;
             let userIndex = jsonData.findIndex(e => e.mail == mail);
             if (userIndex === -1) {
                 let newUser = {id, nombre, apellido, pw, mail, tipo }
@@ -96,8 +97,4 @@ const postUserController = (req, res) => {
         }
     });
 }
-
-
-
-
   module.exports= {getUsersController, getUserByIDController,deleteUserController,postUserController}
