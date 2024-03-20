@@ -1,4 +1,3 @@
-
 const fs =require('fs');
 const getUsersController =  (req,res) => {
     fs.readFile('users.json', 'utf8',  (err, data) => {
@@ -69,30 +68,35 @@ const deleteUserController = (req, res) => {
 
     });
 };
-const postUserController = (req,res)=>{
-    fs.readFile('users.json', 'utf8',  (err, data) => {
+const postUserController = (req, res) => {
+    fs.readFile('users.json', 'utf8', (err, data) => {
         if (err) {
             res.status(500).send('Error reading file');
             return;
         }
         try {
-            const {nombre, apellido, pw, mail, tipo} =  req.body
+            const {id, nombre, apellido, pw, mail, tipo } = req.body
             const jsonData = JSON.parse(data);
             let userIndex = jsonData.findIndex(e => e.mail == mail);
-            console.log(jsonData);
-            if(!userIndex.length){
-                let newUser = {nombre,apellido,pw,mail,tipo}
+            if (userIndex === -1) {
+                let newUser = {id, nombre, apellido, pw, mail, tipo }
                 jsonData.push(newUser)
-                res.json('user created succesfully')
-            }else{
-                res.json('user with this email adress already exist')
+                fs.writeFile('users.json', JSON.stringify(jsonData), (err) => {
+                    if (err) {
+                        res.status(500).send('Error writing file');
+                        return;
+                    }
+                    res.json('User created successfully');
+                });
+            } else {
+                res.json('User with this email address already exists');
             }
-
         } catch (error) {
             res.status(500).send('Error parsing JSON');
         }
     });
 }
+
 
 
 
