@@ -38,7 +38,7 @@ const getUsersController =  (req,res) => {
     });
 };
 
-const deleteUserController = (req,res)=>{
+const deleteUserController = (req, res) => {
     fs.readFile('users.json', 'utf8', (err, data) => {
         if (err) {
             console.log(err);
@@ -46,21 +46,30 @@ const deleteUserController = (req,res)=>{
             return;
         }
         try {
-            const {id} = req.params
-            const jsonData = JSON.parse(data)
-            let userById = jsonData.filter(e=>e.id == id)
-                if(userById.length){
-                    delete(userById)
-                    res.json('Usuer deleted')
-                }else{
-                    res.status(404).send('User not found')
-                }
+            const { id } = req.params;
+            const jsonData = JSON.parse(data);
+            let userIndex = jsonData.findIndex(e => e.id == id);
+
+            if (userIndex !== -1) {
+                jsonData.splice(userIndex, 1);
+                fs.writeFile('users.json', JSON.stringify(jsonData), 'utf8', (err) => {
+                    if (err) {
+                        console.log(err);
+                        res.status(500).send('Error writing file');
+                        return;
+                    }
+                    res.json('User deleted');
+                });
+            } else {
+                res.status(404).send('User not found');
+            }
         } catch (error) {
             res.status(500).send('Error processing request');
-
         }
-    })
-    }
+
+    });
+};
+
 
 
   module.exports= {getUsersController, getUserByIDController,deleteUserController}
