@@ -1,5 +1,5 @@
 
-const fs =require('fs')
+const fs =require('fs');
 const getUsersController =  (req,res) => {
     fs.readFile('users.json', 'utf8',  (err, data) => {
         if (err) {
@@ -69,7 +69,31 @@ const deleteUserController = (req, res) => {
 
     });
 };
+const postUserController = (req,res)=>{
+    fs.readFile('users.json', 'utf8',  (err, data) => {
+        if (err) {
+            res.status(500).send('Error reading file');
+            return;
+        }
+        try {
+            const {nombre, apellido, pw, mail, tipo} =  req.body
+            const jsonData = JSON.parse(data);
+            let userIndex = jsonData.findIndex(e => e.mail == mail);
+            console.log(jsonData);
+            if(!userIndex.length){
+                let newUser = {nombre,apellido,pw,mail,tipo}
+                jsonData.push(newUser)
+                res.json('user created succesfully')
+            }else{
+                res.json('user with this email adress already exist')
+            }
+
+        } catch (error) {
+            res.status(500).send('Error parsing JSON');
+        }
+    });
+}
 
 
 
-  module.exports= {getUsersController, getUserByIDController,deleteUserController}
+  module.exports= {getUsersController, getUserByIDController,deleteUserController,postUserController}
