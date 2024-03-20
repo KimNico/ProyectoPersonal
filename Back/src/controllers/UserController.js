@@ -6,7 +6,6 @@ const getUsersController =  (req,res) => {
             return;
         }
         try {
-            // Parse the JSON data
             const jsonData = JSON.parse(data);
             res.json(jsonData);
         } catch (error) {
