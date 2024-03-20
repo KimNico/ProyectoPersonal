@@ -17,4 +17,10 @@ const getPublicacionesController = async (req,res) => {
         }
     });
   }
+
+
+  const postPublicacionController = async(req,res)=>{
+    const { titulo, descripcion, ubicaion, salario} = req.body
+    
+  }
   module.exports = {getPublicacionesController}
