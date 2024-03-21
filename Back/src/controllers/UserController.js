@@ -96,4 +96,41 @@ const postUserController = (req, res) => {
         }
     });
 }
-  module.exports= {getUsersController, getUserByIDController,deleteUserController,postUserController}
+
+const putUserController = (req, res) => {
+    fs.readFile('users.json', 'utf8', (err, data) => {
+        if (err) {
+            res.status(500).send('Error reading file');
+            return;
+        }
+        try {
+            const { id } = req.params;
+            const { nombre, apellido, pw, mail, tipo } = req.body;
+            const jsonData = JSON.parse(data);
+
+            const userIndex = jsonData.findIndex(e => e.id == id);
+            if (userIndex !== -1) {
+                jsonData[userIndex].nombre = nombre || jsonData[userIndex].nombre;
+                jsonData[userIndex].apellido = apellido || jsonData[userIndex].apellido;
+                jsonData[userIndex].pw = pw || jsonData[userIndex].pw;
+                jsonData[userIndex].mail = mail || jsonData[userIndex].mail;
+                jsonData[userIndex].tipo = tipo || jsonData[userIndex].tipo;
+
+                fs.writeFile('users.json', JSON.stringify(jsonData), (err) => {
+                    if (err) {
+                        res.status(500).send('Error writing file');
+                        return;
+                    }
+                    res.status(200).send('User updated successfully');
+                });
+            } else {
+                res.status(404).send('User not found');
+            }
+        } catch (error) {
+            res.status(500).send('Error updating user');
+        }
+    });
+};
+
+
+  module.exports= {getUsersController, getUserByIDController,deleteUserController,postUserController,putUserController}
