@@ -1,5 +1,5 @@
 
-const fs =require('fs')
+const fs =require('fs');
 const getPublicacionesController = async (req,res) => {
     fs.readFile('publicaciones.json', 'utf8', async (err, data) => {
         if (err) {
@@ -62,7 +62,16 @@ const getPublicacionesController = async (req,res) => {
             const {titulo, descripcion, ubicacion, salario} = req.body;
             const jsonData = JSON.parse(data);
             let id = jsonData.length > 0 ? jsonData[jsonData.length - 1].id + 1 : 1;
-
+            
+            let newPost = {id, titulo,descripcion,ubicacion,salario}
+            jsonData.push(newPost)
+            fs.writeFile('publicaciones.json', JSON.stringify(jsonData), (err) => {
+                if (err) {
+                    res.status(500).send('Error writing file');
+                    return;
+                }
+                res.json('Post created successfully');
+            });
         } catch (error) {
             console.error(error);
             res.status(500).send('Error parsing JSON');
