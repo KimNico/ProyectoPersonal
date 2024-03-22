@@ -28,11 +28,8 @@ module.exports = (sequelize) =>{
             type: DataTypes.DATE,
             allowNull: false,
             defaultValue: Sequelize.NOW,
-          },
-          cant_postulaciones:{
-            type: DataTypes.INTEGER,
-            allowNull: false
-          }}
+          }
+        }
     )
 
 }

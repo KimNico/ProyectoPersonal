@@ -1,14 +1,13 @@
 const {Router} = require("express")
-const {getPublicacionesController} = require("../controllers/PublicacionController")
+const {getPublicacionesController, postPublicacionController,deletePublicacionController} = require("../controllers/PublicacionController")
 
 const publicacionRoute = Router()
 
-publicacionRoute.post('/')
+publicacionRoute.post('/',postPublicacionController)
 publicacionRoute.put('/"id')
 publicacionRoute.get('/',getPublicacionesController)
-publicacionRoute.delete('/:id')
+publicacionRoute.delete('/:id',deletePublicacionController)
 publicacionRoute.get('/:id')
 
 
 module.exports = publicacionRoute;
-
