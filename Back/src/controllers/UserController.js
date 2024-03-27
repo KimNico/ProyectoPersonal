@@ -1,136 +1,95 @@
-const fs =require('fs');
-const getUsersController =  (req,res) => {
-    fs.readFile('users.json', 'utf8',  (err, data) => {
-        if (err) {
-            res.status(500).send('Error reading file');
-            return;
-        }
-        try {
-            const jsonData = JSON.parse(data);
-            res.json(jsonData);
-        } catch (error) {
-            res.status(500).send('Error parsing JSON');
-        }
-    });
+const {User} = require('../db');
+
+// Obtener todos los Users
+const getUsersController = async (req, res) => {
+  try {
+    const users = await User.findAll();
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ error: 'Hubo un error al obtener los Users.' });
+    console.log(error);
   }
-
-  const getUserByIDController = (req, res) => {
-    fs.readFile('users.json', 'utf8', (err, data) => {
-        if (err) {
-            console.log(err);
-            res.status(500).send('Error reading file');
-            return;
-        }
-        try {
-            const { id } = req.params;
-            const jsonData = JSON.parse(data);
-            let userById = jsonData.filter(e => e.id == id);
-            if (userById.length) {
-                res.json(userById);
-            } else {
-                res.status(404).send('User not found');
-            }
-        } catch (error) {
-            res.status(500).send('Error processing request');
-        }
-    });
 };
 
-const deleteUserController = (req, res) => {
-    fs.readFile('users.json', 'utf8', (err, data) => {
-        if (err) {
-            console.log(err);
-            res.status(500).send('Error reading file');
-            return;
-        }
-        try {
-            const { id } = req.params;
-            const jsonData = JSON.parse(data);
-            let userIndex = jsonData.findIndex(e => e.id == id);
-
-            if (userIndex !== -1) {
-                jsonData.splice(userIndex, 1);
-                fs.writeFile('users.json', JSON.stringify(jsonData), 'utf8', (err) => {
-                    if (err) {
-                        console.log(err);
-                        res.status(500).send('Error writing file');
-                        return;
-                    }
-                    res.json('User deleted');
-                });
-            } else {
-                res.status(404).send('User not found');
-            }
-        } catch (error) {
-            res.status(500).send('Error processing request');
-        }
-
-    });
-};
-const postUserController = (req, res) => {
-    fs.readFile('users.json', 'utf8', (err, data) => {
-        if (err) {
-            res.status(500).send('Error reading file');
-            return;
-        }
-        try {
-            const { nombre, apellido, pw, mail, tipo } = req.body
-            const jsonData = JSON.parse(data);
-            let id = jsonData.length > 0 ? jsonData[jsonData.length - 1].id + 1 : 1;
-            let userIndex = jsonData.findIndex(e => e.mail == mail);
-            if (userIndex === -1) {
-                let newUser = {id, nombre, apellido, pw, mail, tipo }
-                jsonData.push(newUser)
-                fs.writeFile('users.json', JSON.stringify(jsonData), (err) => {
-                    if (err) {
-                        res.status(500).send('Error writing file');
-                        return;
-                    }
-                    res.json('User created successfully');
-                });
-            } else {
-                res.json('User with this email address already exists');
-            }
-        } catch (error) {
-            res.status(500).send('Error parsing JSON');
-        }
-    });
-}
-
-const putUserController = (req, res) => {
-    fs.readFile('users.json', 'utf8', (err, data) => {
-        if (err) {
-            res.status(500).send('Error reading file');
-            return;
-        }
-        try {
-            const { id } = req.params;
-            const { nombre, apellido, pw, mail, tipo } = req.body;
-            const jsonData = JSON.parse(data);
-
-            const userIndex = jsonData.findIndex(e => e.id == id);
-            if (userIndex !== -1) {
-                jsonData[userIndex].nombre = nombre || jsonData[userIndex].nombre;
-                jsonData[userIndex].apellido = apellido || jsonData[userIndex].apellido;
-                jsonData[userIndex].pw = pw || jsonData[userIndex].pw;
-                jsonData[userIndex].mail = mail || jsonData[userIndex].mail;
-                jsonData[userIndex].tipo = tipo || jsonData[userIndex].tipo;
-
-                fs.writeFile('users.json', JSON.stringify(jsonData), (err) => {
-                    if (err) {
-                        res.status(500).send('Error writing file');
-                        return;
-                    }
-                    res.status(200).send('User updated successfully');
-                });
-            } else {
-                res.status(404).send('User not found');
-            }
-        } catch (error) {
-            res.status(500).send('Error updating user');
-        }
-    });
+// Obtener un User por ID
+const getUserByIDController = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const User = await User.findByPk(id);
+    if (!User) {
+      return res.status(404).json({ error: 'User no encontrado.' });
+    }
+    res.json(User);
+  } catch (error) {
+    res.status(500).json({ error: 'Hubo un error al obtener el User.' });
+  }
 };
 
+// Crear un nuevo User
+const postUserController = async (req, res) => {
+  const { nombre, apellido, pw, tipo, mail } = req.body;
+  try {
+    let users = await User.findAll();
+    if(!users.length){
+        let id = users.length > 0 ? users[users.length - 1].id + 1 :1;
+        const user = await User.create({id, nombre, apellido, pw, tipo, mail });
+        res.status(201).json(user);
+    }else{
+        let findEmail = await User.findAll({ where: { mail: mail } });
+        if(!nombre || !mail){
+            res.send(500).json("parameters can't be null")
+        }else{
+            if(findEmail.length){
+                res.json("User already exist with this mail");
+            }else{
+                const user = await User.create({id, nombre, apellido, pw, tipo, mail });
+                res.status(201).json(user);
+            }
+        }
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Hubo un error al crear el User.' });
+    console.log(error);
+  }
+};
 
-  module.exports= {getUsersController, getUserByIDController,deleteUserController,postUserController,putUserController}
+// Actualizar un User
+const putUserController = async (req, res) => {
+  const { id } = req.params;
+  const { nombre, email } = req.body;
+  try {
+    const User = await User.findByPk(id);
+    if (!User) {
+      return res.status(404).json({ error: 'User no encontrado.' });
+    }
+    User.nombre = nombre;
+    User.email = email;
+    await User.save();
+    res.json(User);
+  } catch (error) {
+    res.status(500).json({ error: 'Hubo un error al actualizar el User.' });
+  }
+};
+
+// Eliminar un User
+const deleteUserController = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const User = await User.findByPk(id);
+    if (!User) {
+      return res.status(404).json({ error: 'User no encontrado.' });
+    }
+    await User.destroy();
+    res.json({ mensaje: 'User eliminado correctamente.' });
+  } catch (error) {
+    res.status(500).json({ error: 'Hubo un error al eliminar el User.' });
+  }
+};
+
+module.exports = {
+    getUsersController,
+    getUserByIDController,
+    postUserController,
+    putUserController,
+  deleteUserController,
+};

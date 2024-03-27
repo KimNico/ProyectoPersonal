@@ -1,1 +1,58 @@
-[{"id":1,"nombre":"Juan","apellido":"González","mail":"juan@example.com","tipo":"solicitante"},{"id":2,"nombre":"María","apellido":"López","mail":"maria@example.com","tipo":"solicitante"},{"id":3,"nombre":"Pedro","apellido":"Martínez","mail":"pedro@example.com","tipo":"solicitante"},{"id":4,"nombre":"Ana","apellido":"Rodríguez","mail":"ana@example.com","tipo":"solicitante"},{"id":5,"nombre":"Luis","apellido":"Hernández","mail":"luis@example.com","tipo":"solicitante"},{"id":6,"nombre":"Laura","apellido":"Gómez","mail":"laura@example.com","tipo":"solicitante"},{"id":7,"nombre":"Juana","apellido":"Perez","mail":"juana@example.com","tipo":"solicitante"}]
+[
+    {
+        "id": 1,
+        "nombre": "Juan",
+        "apellido": "González",
+        "pw": "pw1",
+        "mail": "juan@example.com",
+        "tipo": "solicitante"
+    },
+    {
+        "id": 2,
+        "nombre": "María",
+        "apellido": "López",
+        "pw": "pw2",
+        "mail": "maria@example.com",
+        "tipo": "solicitante"
+    },
+    {
+        "id": 3,
+        "nombre": "Pedro",
+        "apellido": "Martínez",
+        "pw": "pw3",
+        "mail": "pedro@example.com",
+        "tipo": "solicitante"
+    },
+    {
+        "id": 4,
+        "nombre": "Ana",
+        "apellido": "Rodríguez",
+        "pw": "pw4",
+        "mail": "ana@example.com",
+        "tipo": "solicitante"
+    },
+    {
+        "id": 5,
+        "nombre": "Luis",
+        "apellido": "Hernández",
+        "pw": "pw5",
+        "mail": "luis@example.com",
+        "tipo": "solicitante"
+    },
+    {
+        "id": 6,
+        "nombre": "Laura",
+        "apellido": "Gómez",
+        "pw": "pw6",
+        "mail": "laura@example.com",
+        "tipo": "solicitante"
+    },
+    {
+        "id": 7,
+        "nombre": "Juana",
+        "apellido": "Perez",
+        "pw": "pw7",
+        "mail": "juana@example.com",
+        "tipo": "solicitante"
+    }
+]
