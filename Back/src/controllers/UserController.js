@@ -30,22 +30,18 @@ const postUserController = async (req, res) => {
   const { nombre, apellido, pw, tipo, mail } = req.body;
   try {
     let users = await User.findAll();
-    if(!users.length){
-        let id = users.length > 0 ? users[users.length - 1].id + 1 :1;
-        const user = await User.create({id, nombre, apellido, pw, tipo, mail });
-        res.status(201).json(user);
-    }else{
-        let findEmail = await User.findAll({ where: { mail: mail } });
+    let findEmail = await User.findAll({ where: { mail: mail } });
         if(!nombre || !mail){
             res.send(500).json("parameters can't be null")
         }else{
             if(findEmail.length){
                 res.json("User already exist with this mail");
             }else{
-                const user = await User.create({id, nombre, apellido, pw, tipo, mail });
+                const user = await User.create({ nombre, apellido, pw, tipo, mail });
                 res.status(201).json(user);
+                res.json("user created successfuly")
             }
-        }
+        
     }
   } catch (error) {
     res.status(500).json({ error: 'Hubo un error al crear el User.' });
