@@ -28,13 +28,11 @@ const getUserByIDController = async (req, res) => {
 // Crear un nuevo User
 const postUserController = async (req, res) => {
   const { nombre, apellido, pw, tipo, mail } = req.body;
+  let findEmail = await User.findAll({ where: { mail: mail } });
   try {
-    let users = await User.findAll();
-    let findEmail = await User.findAll({ where: { mail: mail } });
         if(!nombre || !mail){
             res.send(500).json("parameters can't be null")
-        }else{
-            if(findEmail.length){
+        }else if(findEmail.length){
                 res.json("User already exist with this mail");
             }else{
                 const user = await User.create({ nombre, apellido, pw, tipo, mail });
@@ -42,7 +40,7 @@ const postUserController = async (req, res) => {
                 res.json("user created successfuly")
             }
         
-    }
+    
   } catch (error) {
     res.status(500).json({ error: 'Hubo un error al crear el User.' });
     console.log(error);
