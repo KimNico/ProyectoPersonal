@@ -31,16 +31,13 @@ const postUserController = async (req, res) => {
   let findEmail = await User.findAll({ where: { mail: mail } });
   try {
         if(!nombre || !mail){
-            res.send(500).json("parameters can't be null")
+          return  res.status(500).send("parameters can't be null")
         }else if(findEmail.length){
-                res.json("User already exist with this mail");
-            }else{
+            return res.status(409).send("User already exist with this mail");
+        }else{
                 const user = await User.create({ nombre, apellido, pw, tipo, mail });
-                res.status(201).json(user);
-                res.json("user created successfuly")
-            }
-        
-    
+              }
+              res.json("user created successfuly")
   } catch (error) {
     res.status(500).json({ error: 'Hubo un error al crear el User.' });
     console.log(error);
@@ -50,18 +47,22 @@ const postUserController = async (req, res) => {
 // Actualizar un User
 const putUserController = async (req, res) => {
   const { id } = req.params;
-  const { nombre, email } = req.body;
+  const { nombre, apellido, pw, tipo, mail } = req.body;
   try {
-    const User = await User.findByPk(id);
-    if (!User) {
+    const user = await User.findByPk(id);
+    if (!user) {
       return res.status(404).json({ error: 'User no encontrado.' });
     }
-    User.nombre = nombre;
-    User.email = email;
-    await User.save();
-    res.json(User);
+    user.nombre = nombre;
+    user.apellido = apellido;
+    user.pw = pw;
+    user.tipo = tipo;
+    user.email = mail;
+    await user.save();
+    res.json(user);
   } catch (error) {
     res.status(500).json({ error: 'Hubo un error al actualizar el User.' });
+    console.log(error);
   }
 };
 
