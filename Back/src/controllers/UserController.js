@@ -15,11 +15,11 @@ const getUsersController = async (req, res) => {
 const getUserByIDController = async (req, res) => {
   const { id } = req.params;
   try {
-    const User = await User.findByPk(id);
-    if (!User) {
+    const user = await User.findByPk(id);
+    if (!user) {
       return res.status(404).json({ error: 'User no encontrado.' });
     }
-    res.json(User);
+    res.json(user);
   } catch (error) {
     res.status(500).json({ error: 'Hubo un error al obtener el User.' });
   }
@@ -70,14 +70,15 @@ const putUserController = async (req, res) => {
 const deleteUserController = async (req, res) => {
   const { id } = req.params;
   try {
-    const User = await User.findByPk(id);
-    if (!User) {
+    const user = await User.findByPk(id);
+    if (!user) {
       return res.status(404).json({ error: 'User no encontrado.' });
     }
-    await User.destroy();
+    await user.destroy();
     res.json({ mensaje: 'User eliminado correctamente.' });
   } catch (error) {
     res.status(500).json({ error: 'Hubo un error al eliminar el User.' });
+    console.log(error);
   }
 };
 
