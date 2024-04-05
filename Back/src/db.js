@@ -4,7 +4,7 @@ const path = require("path");
 
 // Configuración de la base de datos
 const sequelize = new Sequelize('proyecto_db', 'root', '', {
-  host: 'localhost',
+  storage: path.join(__dirname, 'mydatabase.sqlite'), // Use an absolute path
   dialect: 'sqlite', // Puede ser 'mysql', 'sqlite', 'postgres', 'mssql'
 });
 
