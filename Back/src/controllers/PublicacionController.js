@@ -1,81 +1,79 @@
-
-const fs =require('fs');
+const {Publicacion} = require ('../db')
 const getPublicacionesController = async (req,res) => {
-    fs.readFile('publicaciones.json', 'utf8', async (err, data) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send('Error reading file');
-            return;
-        }
-        try {
-            // Parse the JSON data
-            const jsonData = JSON.parse(data);
-            res.json(jsonData);
-        } catch (error) {
-            console.error(error);
-            res.status(500).send('Error parsing JSON');
-        }
-    });
+  try{
+    const publicaciones = await Publicacion.findAll();
+    res.json(publicaciones)
+
+  }catch(error){
+    res.status(500).json({error:'Hubo un error al obetener las publicaciones'})
+    console.log(error);
+  }
   }
 
-  const deletePublicacionController = (req,res)=>{
-    fs.readFile('publicaciones.json', 'utf8', (err, data) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send('Error reading file');
-            return;
-        }
-        try {
-            let {id} = req.params
-            const jsonData = JSON.parse(data);
-            console.log(jsonData);
-            let postIndex = jsonData.findIndex(e => e.id == id)
-            if(postIndex !== -1){
-                jsonData.splice(postIndex,1)
-                fs.writeFile('publicaciones.json',JSON.stringify(jsonData),'utf8',(err)=>{
-                    if(err){
-                        res.status(500).send("Error writing file")
-                        return;
-                    }
-                    res.json('Post deleted')
+  const getByIdPublicacionController = async (req,res) => {
+        const {id} =req.params
+    try{
+      const publicacion = await Publicacion.findByPk(id);
+      if(!publicacion.length){
+        res.status(404).json({error:'Publicacion no encontrado'})
+      }else{
+        res.json(publicacion)
+      }
+    }catch(error){
+      res.status(500).json({error:'Hubo un error al obetener las publicaciones'})
+      console.log(error);
+    }
+    }
 
-                })
-               
-            }else{
-                res.status(404).send('Post not found');
-            }
-        } catch (error) {
-            console.error(error);
-            res.status(500).send('Error parsing JSON');
+
+
+  const deletePublicacionController = async (req,res)=>{
+    try {
+        const {id} = req.params;
+        const publicacion = await Publicacion.findByPk(id);
+        if(!publicacion.length){
+            res.status(404).json({error:'Publicacion no encontrado'})
+        }else{
+            await publicacion.destroy()
+            res.status(200).json('Publicacion eliminado con exito');
         }
-    });
+
+    } catch (error) {
+        res.status(500).json({error:'Hubo un error al eliminar una publicacion'})
+    console.log(error);
+    }
   }
 
   const postPublicacionController = async(req,res)=>{
-    fs.readFile('publicaciones.json', 'utf8', async (err, data) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send('Error reading file');
-            return;
-        }
-        try {
-            const {titulo, descripcion, ubicacion, salario} = req.body;
-            const jsonData = JSON.parse(data);
-            let id = jsonData.length > 0 ? jsonData[jsonData.length - 1].id + 1 : 1;
-            
-            let newPost = {id, titulo,descripcion,ubicacion,salario}
-            jsonData.push(newPost)
-            fs.writeFile('publicaciones.json', JSON.stringify(jsonData), (err) => {
-                if (err) {
-                    res.status(500).send('Error writing file');
-                    return;
-                }
-                res.json('Post created successfully');
-            });
-        } catch (error) {
-            console.error(error);
-            res.status(500).send('Error parsing JSON');
-        }
-    });
+      const {titulo, descripcion, ubicacion, salario} = req.body
+   try {
+    const publicacion = await Publicacion.create({titulo,descripcion,ubicacion,salario})
+    res.json("publicacion creado exitosamente")
+   } catch (error) {
+    res.status(500).json({error:'Hubo un error al cargar la publicacion'})
+    console.log(error);
+   }
   }
-  module.exports = {getPublicacionesController, postPublicacionController,deletePublicacionController}
+
+  const putPublicacionController = async (req,res)=>{
+    try {
+        const {id} = req.params
+        const {titulo, descripcion, ubicacion, salario} = req.body
+        const publicacion = await Publicacion.findByPk(id)
+        if(!publicacion.length){
+            res.status(404).json({error:'Publicacion no encontrado'})
+        }else{
+            publicacion.titulo = titulo;
+            publicacion.descripcion = descripcion;
+            publicacion.ubicacion = ubicacion;
+            publicacion.salario = salario;
+            await publicacion.save()
+        }
+    } catch (error) {
+        res.status(500).json({error:'Hubo un error al actualizar la publicacion'})
+        console.log(error);
+    }
+  }
+
+
+  module.exports = {getPublicacionesController, postPublicacionController,deletePublicacionController,putPublicacionController,getByIdPublicacionController}
