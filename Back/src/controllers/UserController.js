@@ -27,7 +27,7 @@ const getUserByIDController = async (req, res) => {
 
 // Crear un nuevo User
 const postUserController = async (req, res) => {
-  const { nombre, apellido, pw, tipo, mail } = req.body;
+  const { nombre, apellido, pw, tipo, mail,foto,cv } = req.body;
   let findEmail = await User.findAll({ where: { mail: mail } });
   try {
         if(!nombre || !mail){
@@ -35,9 +35,9 @@ const postUserController = async (req, res) => {
         }else if(findEmail.length){
             return res.status(409).send("User already exist with this mail");
         }else{
-                const user = await User.create({ nombre, apellido, pw, tipo, mail });
+                const user = await User.create({ nombre, apellido, pw, tipo, mail,foto,cv });
+                res.json(user,"user created successfuly")
               }
-              res.json("user created successfuly")
   } catch (error) {
     res.status(500).json({ error: 'Hubo un error al crear el User.' });
     console.log(error);
@@ -47,7 +47,7 @@ const postUserController = async (req, res) => {
 // Actualizar un User
 const putUserController = async (req, res) => {
   const { id } = req.params;
-  const { nombre, apellido, pw, tipo, mail } = req.body;
+  const { nombre, apellido, pw, tipo, mail,foto, cv } = req.body;
   try {
     const user = await User.findByPk(id);
     if (!user) {
@@ -58,6 +58,8 @@ const putUserController = async (req, res) => {
     user.pw = pw;
     user.tipo = tipo;
     user.email = mail;
+    user.foto = foto;
+    user.cv = cv;
     await user.save();
     res.json(user);
   } catch (error) {

@@ -17,7 +17,30 @@ module.exports = (sequelize) =>{
                 type: DataTypes.TEXT,
                 allowNull: false,
               },
+              cant_empleados:{
+                type: DataTypes.INTEGER,
+                allowNull: false
+              },
+              logo:{
+                type: DataTypes.STRING(500),
+                allowNull: false,
+              },
+              mail:{
+                type: DataTypes.STRING,
+                allowNull:false
+              },
+              pw:{
+                type:DataTypes.STRING,
+                allowNull:false,
+              },
+              industria:{
+                type:DataTypes.STRING,
+                allowNull:false,
+              },
+              telefono:{
+                type:DataTypes.STRING,
+                allowNull:false,
+              }
         }
     )
-
 }
