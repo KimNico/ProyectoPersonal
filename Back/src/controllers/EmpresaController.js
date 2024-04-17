@@ -26,7 +26,7 @@ const getEmpresaController = async (req,res) => {
   };
 
   const postEmpresaController = async (req,res)=>{
-    const { nombre_empresa, descripcion, cant_empleados, logo, mail, pw, industria} = req.body;
+    const { nombre_empresa, descripcion, cant_empleados, logo, mail, pw, categoria} = req.body;
     let findMail = Empresa.findAll({where:{mail:mail}})
     try {
       if(!nombre_empresa || mail){
@@ -34,7 +34,7 @@ const getEmpresaController = async (req,res) => {
       }else if(findMail.length){
         return res.status(409).send("Company already exist with this mail");
       }else{
-        const empresa = await Empresa.create({nombre_empresa, descripcion, cant_empleados, logo, mail, pw, industria });
+        const empresa = await Empresa.create({nombre_empresa, descripcion, cant_empleados, logo, mail, pw, categoria });
         res.json(empresa,"Company created successfuly")
       }
     } catch (error) {
@@ -56,7 +56,7 @@ try {
     empresa.logo = logo
     empresa.mail = mail
     empresa.pw = pw
-    empresa.industria = industria
+    empresa.categoria = categoria
     await empresa.save()
     res.json(empresa)
   }

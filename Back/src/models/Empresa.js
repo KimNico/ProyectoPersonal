@@ -33,7 +33,7 @@ module.exports = (sequelize) =>{
                 type:DataTypes.STRING,
                 allowNull:false,
               },
-              industria:{
+              categoria:{
                 type:DataTypes.STRING,
                 allowNull:false,
               },
