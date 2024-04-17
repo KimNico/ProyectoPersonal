@@ -60,6 +60,7 @@ export const getUsers = () => {
   
   export const deleteEmpresa = (id)=>{
     return async function(dispatch){
-      await axios.delete()
+      await axios.delete(`/empresa/?id=${id}`).then(dispatch(getEmpresas()))
     }
   }
+
