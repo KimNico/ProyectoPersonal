@@ -1,8 +1,14 @@
 const { Empresa } =require('../db')
 const getEmpresaController = async (req,res) => {
+  let {nombre} =req.query
     try {
+      if(nombre){
+        let findEmpresa = Empresa.findAll({where:{nombre:nombre}})
+        return findEmpresa
+      }else{
         const empresa = await Empresa.findAll()
-        res.json(empresa)
+        return empresa
+      }
     }
     catch(error) {
       res.status(500).json({ error: 'Error al cargar las empresas'});
@@ -16,7 +22,7 @@ const getEmpresaController = async (req,res) => {
       if(!empresa.length){
         res.status(404).json({error:'Empresa no encotrado'})
       }else{
-        res.json(empresa)
+        return empresa
       }
       
     } catch (error) {
@@ -35,7 +41,7 @@ const getEmpresaController = async (req,res) => {
         return res.status(409).send("Company already exist with this mail");
       }else{
         const empresa = await Empresa.create({nombre_empresa, descripcion, cant_empleados, logo, mail, pw, categoria });
-        res.json(empresa,"Company created successfuly")
+        return res.status(200).send(empresa,"Company created successfuly")
       }
     } catch (error) {
       res.status(500).send({error:"Error al crear la empresa"})
