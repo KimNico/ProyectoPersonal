@@ -29,7 +29,7 @@ const getUserByIDController = async (req, res) => {
 const postUserController = async (req, res) => {
   const { nombre, apellido, pw, tipo, mail,foto,cv } = req.body;
   let findEmail = await User.findAll({ where: { mail: mail } });
-  try {
+  try{
         if(!nombre || !mail){
           return  res.status(500).send("parameters can't be null")
         }else if(findEmail.length){
@@ -38,7 +38,7 @@ const postUserController = async (req, res) => {
                 const user = await User.create({ nombre, apellido, pw, tipo, mail,foto,cv });
                 res.json(user,"user created successfuly")
               }
-  } catch (error) {
+  }catch(error) {
     res.status(500).json({ error: 'Hubo un error al crear el User.' });
     console.log(error);
   }

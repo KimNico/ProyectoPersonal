@@ -1,4 +1,4 @@
-const getCategoriaController = async (req,res) => {
+const getCategoriaController =  (req,res) => {
     try {
         res.status(200).send(`Categoria`);
     }
