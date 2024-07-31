@@ -74,7 +74,7 @@ try {
 
   const deleteEmpresaController = async(req,res)=>{
     let {id} = req.params
-    try {
+    try{
       let empresa = Empresa.findByPk(id)
       if(!empresa){
         res.status(404).send({error:"Empresa no encontrada "})
