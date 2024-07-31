@@ -8,6 +8,7 @@ export const GET_EMPRESA_BY_ID = GET_EMPRESA_BY_ID
 export const DELETE_EMPLEO = DELETE_EMPLEO
 export const DELETE_USER = DELETE_USER
 export const DELETE_EMPRESA = DELETE_EMPRESA
+export const GET_EMPRESA_BY_NAME = GET_EMPRESA_BY_NAME
 
 
 export const getUsers = () => {
@@ -64,3 +65,10 @@ export const getUsers = () => {
     }
   }
 
+export const getEmpresaByName = (name) =>{
+  return async function(dispatch){
+    const empresaData = await axios.get(`/empresa/?name=${name}`)
+    const empresa = empresaData.data
+    dispatch({type:GET_EMPRESA_BY_NAME,payload:empresa})
+  }
+}
