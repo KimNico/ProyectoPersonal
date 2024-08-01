@@ -28,7 +28,7 @@ const getUserByIDController = async (req, res) => {
 
 // Crear un nuevo User
 const postUserController = async (req, res) => {
-  const { nombre, apellido, pw, tipo, mail, foto, cv } = req.body;
+  const { nombre, apellido, pw, tipo, mail } = req.body;
   try {
     if (!nombre || !mail) {
       return res.status(400).json({ error: "Los parámetros 'nombre' y 'mail' son obligatorios." });
@@ -39,7 +39,7 @@ const postUserController = async (req, res) => {
       return res.status(409).json({ error: "Ya existe un usuario con este correo electrónico." });
     }
 
-    const user = await User.create({ nombre, apellido, pw, tipo, mail, foto, cv });
+    const user = await User.create({ nombre, apellido, pw, tipo, mail });
     res.status(201).json({ message: 'Usuario creado exitosamente', user });
   } catch (error) {
     console.error('Error creating user:', error);

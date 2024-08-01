@@ -27,14 +27,6 @@ module.exports = (sequelize) => {
     tipo: {
       type: DataTypes.ENUM('solicitante'),
       allowNull: false,
-    },
-    foto: {
-      type: DataTypes.STRING(500),
-      allowNull: false,
-    },
-    cv: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
+    }
   });
 };
