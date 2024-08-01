@@ -2,7 +2,7 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
-const routes  = require("./routes/index.js")
+const routes = require("./routes/index.js");
 const cors = require("cors");
 require("dotenv").config();
 const { ACCESS1 } = process.env;
@@ -10,18 +10,25 @@ const { ACCESS1 } = process.env;
 require("./db.js");
 
 const server = express();
+
 // Configurar CORS
+const corsOptions = {
+  origin: (origin, callback) => {
+    if ([ACCESS1].includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: "GET,POST,PUT,DELETE",
+  allowedHeaders: "Content-Type, Authorization, x-access-token",
+  credentials: true,
+};
+
+server.use(cors(corsOptions));
 
 server.name = "API";
 
-server.use((req, res, next) => {
-  cors({
-    origin: [ACCESS1].find((e) => e === req.headers.origin), // VERIFICAR ORIGEN DE PEDIDO
-    methods: "GET,POST,PUT,DELETE",
-    allowedHeaders: "Content-Type, Authorization, x-access-token",
-  });
-  next();
-});
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 server.use(bodyParser.json({ limit: "50mb" }));
 server.use(cookieParser());
