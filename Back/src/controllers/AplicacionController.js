@@ -29,9 +29,10 @@ const getAplicacionController = async(req,res) => {
   const postAplicacionController = async(req,res)=>{
     const {fecha_aplicacion, estado_aplicacion } = req.body;
     try {
-      
+      const aplicacion = Aplicacion.create({fecha_aplicacion,estado_aplicacion})
+      res.status(200).jsonn({message:"Aplicacion enviada"})
     } catch (error) {
-      
+      res.status(500).json({ error: 'Hubo un error al enviar la apliacion.' });
     }
   }
 
