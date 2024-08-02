@@ -1,4 +1,19 @@
-.searchbar_container{
-    display: inline-flex;
+/* NavBar.module.css */
+.navBar {
+    background-color: #1976d2; /* Material UI primary color */
+}
+
+.navLinks {
+    display: flex;
     align-items: center;
+}
+
+.navLink {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.searchBar {
+    margin-left: auto;
 }
