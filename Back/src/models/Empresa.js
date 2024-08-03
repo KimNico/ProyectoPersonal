@@ -21,10 +21,6 @@ module.exports = (sequelize) =>{
                 type: DataTypes.INTEGER,
                 allowNull: false
               },
-              logo:{
-                type: DataTypes.STRING(500),
-                allowNull: false,
-              },
               mail:{
                 type: DataTypes.STRING,
                 allowNull:false

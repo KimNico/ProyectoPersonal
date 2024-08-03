@@ -1,14 +1,8 @@
 const { Empresa } =require('../db')
 const getEmpresaController = async (req,res) => {
-  let {nombre} =req.query
     try {
-      if(nombre){
-        let findEmpresa = Empresa.findAll({where:{nombre:nombre}})
-        return findEmpresa
-      }else{
-        const empresa = await Empresa.findAll()
-        return empresa
-      }
+    const empresas = await Empresa.findAll()
+    res.status(200).json(empresas)
     }
     catch(error) {
       res.status(500).json({ error: 'Error al cargar las empresas'});
@@ -31,22 +25,28 @@ const getEmpresaController = async (req,res) => {
     }
   };
 
-  const postEmpresaController = async (req,res)=>{
-    const { nombre_empresa, descripcion, cant_empleados, logo, mail, pw, categoria} = req.body;
-    let findMail = Empresa.findAll({where:{mail:mail}})
+  const postEmpresaController = async (req, res) => {
+    const { nombre_empresa, descripcion, cant_empleados, mail, pw, categoria,telefono } = req.body;
+  
     try {
-      if(!nombre_empresa || mail){
-        res.status(500).send("Parameters can't be null")
-      }else if(findMail.length){
-        return res.status(409).send("Company already exist with this mail");
-      }else{
-        const empresa = await Empresa.create({nombre_empresa, descripcion, cant_empleados, logo, mail, pw, categoria });
-        return res.status(200).send(empresa,"Company created successfuly")
+      if (!nombre_empresa || !mail) {
+        return res.status(400).send("Parameters can't be null");
+      }
+  
+      // Wait for the promise to resolve
+      let findMail = await Empresa.findAll({ where: { mail: mail } });
+  
+      if (findMail.length) {
+        return res.status(409).send("Company already exists with this mail");
+      } else {
+        const empresa = await Empresa.create({ nombre_empresa, descripcion, cant_empleados, mail, pw, categoria,telefono });
+        return res.status(201).send({ empresa, message: "Company created successfully" });
       }
     } catch (error) {
-      res.status(500).send({error:"Error al crear la empresa"})
+      return res.status(500).send({ error: "Error al crear la empresa" });
     }
   };
+  
 
   const putEmpresaController = async(req,res)=>{
     const { id } = req.params;
