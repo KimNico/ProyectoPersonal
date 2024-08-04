@@ -36,16 +36,17 @@ export const getUser = (id) => {
 };
 
 export const getEmpresas = () => {
-    return async (dispatch) => {
-        try {
-            const response = await axios.get('http://localhost:3001/empresa');
-            dispatch({ type: GET_EMPRESA, payload: response.data });
-        } catch (error) {
-            console.error('Error fetching empresas:', error);
-            // Optionally dispatch an error action here
-        }
-    };
+  return async (dispatch) => {
+      try {
+          const response = await axios.get('http://localhost:3001/empresa');
+          console.log('Empresas data:', response.data); // Verify data
+          dispatch({ type: GET_EMPRESA, payload: response.data });
+      } catch (error) {
+          console.error('Error fetching empresas:', error);
+      }
+  };
 };
+
 
 export const getEmpresaById = (id) => {
     return async (dispatch) => {

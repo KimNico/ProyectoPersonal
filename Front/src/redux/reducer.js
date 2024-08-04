@@ -71,7 +71,7 @@ const rootReducer = (state = initialState, action) => {
                 users: state.users.filter(user => user.id !== action.payload),
             };
         default:
-            return state; // Always include a default return statement
+            return {...state}; // Always include a default return statement
     }
 };
 

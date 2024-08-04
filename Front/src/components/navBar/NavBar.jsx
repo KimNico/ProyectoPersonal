@@ -20,14 +20,14 @@ export const NavBar = () => {
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                     My App
                 </Typography>
-                <div className={styles.navLinks}>
+                <Box className={styles.navLinks}>
                     <Button color="inherit" component={NavLink} to="/login" className={styles.navLink}>
                         Ingresar
                     </Button>
                     <Button color="inherit" component={NavLink} to="/registrarme" className={styles.navLink}>
                         Registrarme
                     </Button>
-                </div>
+                </Box>
                 <Box className={styles.searchBar}>
                     <SearchBar />
                 </Box>

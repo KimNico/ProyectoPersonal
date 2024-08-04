@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 import styles from '../NavBar.module.css';
 
 export const SearchBar = () => {
@@ -15,7 +16,7 @@ export const SearchBar = () => {
     };
 
     return (
-        <div className={styles.searchBarContainer}>
+        <Box className={styles.searchBarContainer}>
             <TextField
                 variant="outlined"
                 placeholder="Search..."
@@ -29,9 +30,9 @@ export const SearchBar = () => {
                 }}
                 className={styles.searchBar}
             />
-            <button onClick={handleSearch} className={styles.searchButton}>
+            <Button onClick={handleSearch} className={styles.searchButton}>
                 Search
-            </button>
-        </div>
+            </Button>
+        </Box>
     );
 };
