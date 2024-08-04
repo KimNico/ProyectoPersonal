@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import styles from './styles/Home.module.css';
+import { Cards } from "../components/Cards/Cards";
 
 export const Home = () => {
     const dispatch = useDispatch();
@@ -14,6 +15,8 @@ export const Home = () => {
     useEffect(() => {
         dispatch(getEmpresas());
     }, [dispatch]);
+
+    console.log(empresas); // Add this line to log the empresas state
 
     return (
         <div>
@@ -25,18 +28,7 @@ export const Home = () => {
                             Welcome to My App
                         </Typography>
                         {empresas && empresas.length > 0 ? (
-                            <div>
-                                <Typography variant="h5" component="h2" paragraph>
-                                    Empresas:
-                                </Typography>
-                                <ul>
-                                    {empresas.map(empresa => (
-                                        <li key={empresa.id}>
-                                            {empresa.name} {/* Adjust according to your data structure */}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
+                            <Cards cardsData={empresas} />
                         ) : (
                             <Typography>No empresas found.</Typography>
                         )}
