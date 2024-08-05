@@ -24,11 +24,6 @@ module.exports = (sequelize) =>{
             type: DataTypes.DECIMAL(10, 2),
             allowNull: false,
           },
-          fecha_publicacion: {
-            type: DataTypes.DATE,
-            allowNull: false,
-            defaultValue: Sequelize.NOW,
-          }
         }
     )
 
