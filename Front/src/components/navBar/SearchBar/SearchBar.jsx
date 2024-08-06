@@ -2,7 +2,7 @@ import React from "react";
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import styles from './NavBar.module.css'
+import styles from './SearchBar.module.css'
 
 export const SearchBar = ()=>{
     return(

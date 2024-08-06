@@ -5,6 +5,7 @@ import { Home } from './views/Home';
 import { Saved } from './views/Saved';
 import { Login } from './views/Login';
 import { JobDetail } from './views/JobDetail';
+import { Signup } from './views/SignUp';
 function App() {
   return (
    <Routes>
@@ -12,6 +13,7 @@ function App() {
     <Route path ='/jobdetail/:id' element={<JobDetail/>}/>
     <Route path ='/login' element={<Login/>}/>
     <Route path ='/saved' element={<Saved/>}/>
+    <Route path ='/signup' element={<Signup/>}/>
 
    </Routes>
   );
