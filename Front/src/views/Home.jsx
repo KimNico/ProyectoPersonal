@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getEmpresas } from "../redux/action"; // Adjust the path as needed
+import { getEmpresas } from "../redux/action"; 
 import { NavBar } from "../components/NavBar/NavBar";
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
@@ -10,13 +10,13 @@ import { Cards } from "../components/Cards/Cards";
 
 export const Home = () => {
     const dispatch = useDispatch();
-    const empresas = useSelector(state => state.empresas); // Adjust the state path as needed
+    const empresas = useSelector(state => state.empresas); 
 
     useEffect(() => {
         dispatch(getEmpresas());
     }, [dispatch]);
 
-    console.log(empresas); // Add this line to log the empresas state
+    console.log(empresas); 
 
     return (
         <div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../redux/action'; // Adjust the path as necessary
+import { login } from '../redux/action';
 import './styles/Login.module.css';
 
 export const Login = () => {

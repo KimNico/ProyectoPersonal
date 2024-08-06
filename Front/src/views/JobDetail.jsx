@@ -25,7 +25,6 @@ export const JobDetail = () => {
     <div>
       <h1>{company.nombre_empresa}</h1>
       <p>{company.descripcion}</p>
-      {/* Display other company details and include job information as needed */}
     </div>
   );
 };

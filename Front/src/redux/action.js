@@ -21,7 +21,6 @@ export const getUsers = () => {
             dispatch({ type: GET_USERS, payload: response.data });
         } catch (error) {
             console.error('Error fetching users:', error);
-            // Optionally dispatch an error action here
         }
     };
 };
@@ -33,7 +32,6 @@ export const getUser = (id) => {
             dispatch({ type: GET_USERS_BY_ID, payload: response.data });
         } catch (error) {
             console.error(`Error fetching user with id ${id}:`, error);
-            // Optionally dispatch an error action here
         }
     };
 };
@@ -42,7 +40,7 @@ export const getEmpresas = () => {
   return async (dispatch) => {
       try {
           const response = await axios.get('http://localhost:3001/empresa');
-          console.log('Empresas data:', response.data); // Verify data
+          console.log('Empresas data:', response.data); 
           dispatch({ type: GET_EMPRESA, payload: response.data });
       } catch (error) {
           console.error('Error fetching empresas:', error);
@@ -58,7 +56,6 @@ export const getEmpresaById = (id) => {
             dispatch({ type: GET_EMPRESA_BY_ID, payload: response.data });
         } catch (error) {
             console.error(`Error fetching empresa with id ${id}:`, error);
-            // Optionally dispatch an error action here
         }
     };
 };
@@ -82,7 +79,6 @@ export const getPublicacionesById = (id) => {
             dispatch({ type: GET_PUBLICACIONES, payload: response.data });
         } catch (error) {
             console.error(`Error fetching publicaciones with id ${id}:`, error);
-            // Optionally dispatch an error action here
         }
     };
 };
@@ -106,7 +102,6 @@ export const getEmpresaByName = (name) => {
             dispatch({ type: GET_EMPRESA_BY_NAME, payload: response.data });
         } catch (error) {
             console.error(`Error fetching empresa by name ${name}:`, error);
-            // Optionally dispatch an error action here
         }
     };
 };

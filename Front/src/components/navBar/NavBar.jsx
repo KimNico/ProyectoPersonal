@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import HomeIcon from '@mui/icons-material/Home';
 import { NavLink } from 'react-router-dom';
-import { SearchBar } from './SearchBar';
+import { SearchBar } from './SearchBar/SearchBar';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import styles from './NavBar.module.css';

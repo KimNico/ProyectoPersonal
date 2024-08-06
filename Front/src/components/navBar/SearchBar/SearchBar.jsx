@@ -1,38 +1,32 @@
-import React, { useState } from 'react';
+import React from "react";
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
+import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import styles from '../NavBar.module.css';
+import styles from './NavBar.module.css'
 
-export const SearchBar = () => {
-    const [query, setQuery] = useState('');
-
-    const handleChange = (event) => {
-        setQuery(event.target.value);
-    };
-
-    const handleSearch = () => {
-        // Add your search logic here
-        console.log('Searching for:', query);
-    };
-
-    return (
-        <Box className={styles.searchBarContainer}>
-            <TextField
-                variant="outlined"
-                placeholder="Search..."
-                size="small"
-                value={query}
-                onChange={handleChange}
-                onKeyPress={(event) => {
-                    if (event.key === 'Enter') {
-                        handleSearch();
-                    }
-                }}
-                className={styles.searchBar}
-            />
-            <Button onClick={handleSearch} className={styles.searchButton}>
-                Search
-            </Button>
-        </Box>
-    );
-};
+export const SearchBar = ()=>{
+    return(
+        <body>
+            <div>
+            <div className={styles.searchbar_container}>
+                    <Box
+                        component="form"
+                        sx={{
+                        '& .MuiTextField-root': { m: 1, width: '25ch' },
+                        }}
+                        noValidate
+                        autoComplete="off">
+                    <TextField
+                        label="Search"
+                        id="standard-size-small"
+                        defaultValue=""
+                        size="small"
+                        variant="standard"
+                    />
+                    </Box>
+                        <SearchRoundedIcon/>
+                </div>
+            </div>
+        </body>
+    )
+}
