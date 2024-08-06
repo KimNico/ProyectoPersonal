@@ -7,7 +7,9 @@ import {
     GET_USERS_BY_ID,
     DELETE_EMPLEO,
     DELETE_EMPRESA,
-    DELETE_USER 
+    DELETE_USER,
+    LOGIN_SUCCESS,
+    LOGIN_FAILURE
 } from "./action";
 
 const initialState = {
@@ -15,6 +17,8 @@ const initialState = {
     publicaciones: [],
     empresas: [],
     saved: [],
+    currentUser: null,
+    loginError: null,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -70,8 +74,20 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 users: state.users.filter(user => user.id !== action.payload),
             };
+        case LOGIN_SUCCESS:
+            return {
+                ...state,
+                currentUser: action.payload,
+                loginError: null,
+            };
+        case LOGIN_FAILURE:
+            return {
+                ...state,
+                currentUser: null,
+                loginError: action.payload,
+            };
         default:
-            return {...state}; // Always include a default return statement
+            return state;
     }
 };
 

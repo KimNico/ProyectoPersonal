@@ -10,6 +10,9 @@ export const DELETE_EMPLEO = 'DELETE_EMPLEO';
 export const DELETE_USER = 'DELETE_USER';
 export const DELETE_EMPRESA = 'DELETE_EMPRESA';
 export const GET_EMPRESA_BY_NAME = 'GET_EMPRESA_BY_NAME';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAILURE = 'LOGIN_FAILURE';
+
 
 export const getUsers = () => {
     return async (dispatch) => {
@@ -106,4 +109,23 @@ export const getEmpresaByName = (name) => {
             // Optionally dispatch an error action here
         }
     };
+};
+
+export const login = (username, password) => {
+  return async (dispatch) => {
+      try {
+          const response = await axios.post('/api/login', {
+              username,
+              password,
+          });
+          if (response.data.success) {
+              dispatch({ type: LOGIN_SUCCESS, payload: response.data.user });
+          } else {
+              dispatch({ type: LOGIN_FAILURE, payload: 'Invalid username or password' });
+          }
+      } catch (error) {
+          console.error('Error during login:', error);
+          dispatch({ type: LOGIN_FAILURE, payload: 'An error occurred during login' });
+      }
+  };
 };
