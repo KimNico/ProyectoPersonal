@@ -1,4 +1,5 @@
 const { User } = require('../db');
+const bcrypt = require('bcrypt');
 
 // Obtener todos los Users
 const getUsersController = async (req, res) => {
@@ -27,19 +28,23 @@ const getUserByIDController = async (req, res) => {
 };
 
 // Crear un nuevo User
+
 const postUserController = async (req, res) => {
-  const {nombre_usuario, nombre, apellido, pw, mail } = req.body;
+  const { username, name, surname, password, email } = req.body;
   try {
-    if (!nombre || !mail) {
+    if (!name || !email) {
       return res.status(400).json({ error: "Los parámetros 'nombre' y 'mail' son obligatorios." });
     }
 
-    const existingUser = await User.findOne({ where: { mail } });
+    const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
       return res.status(409).json({ error: "Ya existe un usuario con este correo electrónico." });
     }
 
-    const user = await User.create({nombre_usuario, nombre, apellido, pw, mail });
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const user = await User.create({ username, name, surname, password: hashedPassword, email });
     res.status(201).json({ message: 'Usuario creado exitosamente', user });
   } catch (error) {
     console.error('Error creating user:', error);
@@ -47,20 +52,21 @@ const postUserController = async (req, res) => {
   }
 };
 
+
 // Actualizar un User
 const putUserController = async (req, res) => {
   const { id } = req.params;
-  const {nombre_usuario, nombre, apellido, pw, mail } = req.body;
+  const {username, name, surname, password, email } = req.body;
   try {
     const user = await User.findByPk(id);
     if (!user) {
       return res.status(404).json({ error: 'User no encontrado.' });
     }
-    user.nombre_usuario = nombre_usuario || user.nombre_usuario;
-    user.nombre = nombre || user.nombre;
-    user.apellido = apellido || user.apellido;
-    user.pw = pw || user.pw;
-    user.mail = mail || user.mail;
+    user.username = username || user.username;
+    user.name = name || user.name;
+    user.surname = surname || user.surname;
+    user.password = password || user.password;
+    user.email = email || user.email;
 
     await user.save();
     res.status(200).json({ message: 'Usuario actualizado exitosamente', user });
