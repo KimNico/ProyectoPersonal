@@ -24,7 +24,7 @@ export const NavBar = () => {
                     <Button color="inherit" component={NavLink} to="/login" className={styles.navLink}>
                         Ingresar
                     </Button>
-                    <Button color="inherit" component={NavLink} to="/registrarme" className={styles.navLink}>
+                    <Button color="inherit" component={NavLink} to="/signup" className={styles.navLink}>
                         Registrarme
                     </Button>
                 </Box>
