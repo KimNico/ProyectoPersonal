@@ -91,6 +91,27 @@ const deleteUserController = async (req, res) => {
     res.status(500).json({ error: 'Hubo un error al eliminar el User.' });
   }
 };
+const loginController = async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    const user = await User.findOne({ where: { username } });
+    if (!user) {
+      return res.status(401).json({ error: 'Invalid username or password' });
+    }
+
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) {
+      return res.status(401).json({ error: 'Invalid username or password' });
+    }
+
+    const { password: _, ...userData } = user.toJSON();
+    res.status(200).json({ success: true, user: userData });
+  } catch (error) {
+    console.error('Error during login:', error);
+    res.status(500).json({ error: 'An error occurred during login' });
+  }
+};
+
 
 module.exports = {
   getUsersController,
@@ -98,4 +119,5 @@ module.exports = {
   postUserController,
   putUserController,
   deleteUserController,
+  loginController
 };
