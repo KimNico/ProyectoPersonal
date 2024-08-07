@@ -4,7 +4,7 @@ import { login } from '../redux/action';
 import { Link, useNavigate } from 'react-router-dom';
 import { IconButton, TextField, Button, Typography, Container, Paper } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
-import styles from './styles/Login.module.css'; // Import CSS module
+import styles from './styles/Login.module.css'; 
 
 export const Login = () => {
   const [username, setUsername] = useState('');
@@ -13,9 +13,12 @@ export const Login = () => {
   const loginError = useSelector(state => state.loginError);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(login(username, password));
+    const success = await dispatch(login(username, password));
+    if (success) {
+      navigate('/');
+    }
   };
 
   return (

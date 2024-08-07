@@ -1,19 +1,19 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getEmpresas } from "../redux/action"; 
-import { NavBar } from "../components/NavBar/NavBar";
+import { NavBar } from "../components/NavBar/NavBar"; 
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
-import styles from './styles/Home.module.css';
-import { Cards } from "../components/Cards/Cards";
+import styles from './styles/Home.module.css'; 
+import { Cards } from "../components/Cards/Cards"; 
 
 export const Home = () => {
     const dispatch = useDispatch();
     const empresas = useSelector(state => state.empresas); 
 
     useEffect(() => {
-        dispatch(getEmpresas());
+        dispatch(getEmpresas()); 
     }, [dispatch]);
 
     console.log(empresas); 
@@ -28,9 +28,9 @@ export const Home = () => {
                             Welcome to My App
                         </Typography>
                         {empresas && empresas.length > 0 ? (
-                            <Cards cardsData={empresas} />
+                            <Cards cardsData={empresas} /> // Render Cards component if empresas data is available
                         ) : (
-                            <Typography>No empresas found.</Typography>
+                            <Typography>No empresas found.</Typography> // Message if no empresas data
                         )}
                     </Box>
                 </Container>

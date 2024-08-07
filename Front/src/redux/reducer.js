@@ -1,4 +1,4 @@
-import { 
+import {
     GET_EMPRESA,
     GET_USERS,
     GET_PUBLICACIONES,
@@ -10,7 +10,8 @@ import {
     DELETE_USER,
     LOGIN_SUCCESS,
     LOGIN_FAILURE,
-    POST_USER
+    POST_USER,
+    LOGOUT // Import the LOGOUT action type
 } from "./action";
 
 const initialState = {
@@ -87,11 +88,17 @@ const rootReducer = (state = initialState, action) => {
                 currentUser: null,
                 loginError: action.payload,
             };
-            case POST_USER:
-                return{
-                    ...state,
-                    users: [...state.users, action.payload]
-                }
+        case POST_USER:
+            return {
+                ...state,
+                users: [...state.users, action.payload]
+            };
+        case LOGOUT: // Handle logout action
+            return {
+                ...state,
+                currentUser: null,
+                loginError: null,
+            };
         default:
             return state;
     }

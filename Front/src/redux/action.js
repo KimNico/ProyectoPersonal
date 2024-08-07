@@ -13,6 +13,8 @@ export const GET_EMPRESA_BY_NAME = 'GET_EMPRESA_BY_NAME';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const POST_USER = 'POST_USER'
+export const LOGOUT = 'LOGOUT';
+
 
 
 export const getUsers = () => {
@@ -53,7 +55,7 @@ export const getEmpresas = () => {
 export const getEmpresaById = (id) => {
     return async (dispatch) => {
         try {
-            const response = await axios.get(`/empresa/${id}`);
+            const response = await axios.get(`http://localhost:3001/empresa/${id}`);
             dispatch({ type: GET_EMPRESA_BY_ID, payload: response.data });
         } catch (error) {
             console.error(`Error fetching empresa with id ${id}:`, error);
@@ -64,7 +66,7 @@ export const getEmpresaById = (id) => {
 export const getPublicaciones = () => {
     return async (dispatch) => {
         try {
-            const response = await axios.get('/publicaciones');
+            const response = await axios.get('http://localhost:3001/publicaciones');
             dispatch({ type: GET_PUBLICACIONES, payload: response.data });
         } catch (error) {
             console.error('Error fetching publicaciones:', error);
@@ -76,7 +78,7 @@ export const getPublicaciones = () => {
 export const getPublicacionesById = (id) => {
     return async (dispatch) => {
         try {
-            const response = await axios.get(`/publicaciones/${id}`);
+            const response = await axios.get(`http://localhost:3001/publicaciones/${id}`);
             dispatch({ type: GET_PUBLICACIONES, payload: response.data });
         } catch (error) {
             console.error(`Error fetching publicaciones with id ${id}:`, error);
@@ -87,11 +89,10 @@ export const getPublicacionesById = (id) => {
 export const deleteEmpresa = (id) => {
     return async (dispatch) => {
         try {
-            await axios.delete(`/empresa/?id=${id}`);
-            dispatch(getEmpresas()); // Call getEmpresas after successful deletion
+            await axios.delete(`http://localhost:3001/empresa/?id=${id}`);
+            dispatch(getEmpresas());
         } catch (error) {
             console.error(`Error deleting empresa with id ${id}:`, error);
-            // Optionally dispatch an error action here
         }
     };
 };
@@ -99,7 +100,7 @@ export const deleteEmpresa = (id) => {
 export const getEmpresaByName = (name) => {
     return async (dispatch) => {
         try {
-            const response = await axios.get(`/empresa/?name=${name}`);
+            const response = await axios.get(`http://localhost:3001/empresa/?name=${name}`);
             dispatch({ type: GET_EMPRESA_BY_NAME, payload: response.data });
         } catch (error) {
             console.error(`Error fetching empresa by name ${name}:`, error);
@@ -109,22 +110,23 @@ export const getEmpresaByName = (name) => {
 
 export const login = (username, password) => {
   return async (dispatch) => {
-      try {
-          const response = await axios.post('/api/login', {
-              username,
-              password,
-          });
-          if (response.data.success) {
-              dispatch({ type: LOGIN_SUCCESS, payload: response.data.user });
-          } else {
-              dispatch({ type: LOGIN_FAILURE, payload: 'Invalid username or password' });
-          }
-      } catch (error) {
-          console.error('Error during login:', error);
-          dispatch({ type: LOGIN_FAILURE, payload: 'An error occurred during login' });
+    try {
+      const response = await axios.post('http://localhost:3001/user/login', { username, password });
+      if (response.data.success) {
+        dispatch({ type: LOGIN_SUCCESS, payload: response.data.user });
+        return true;
+      } else {
+        dispatch({ type: LOGIN_FAILURE, payload: 'Invalid username or password' });
+        return false;
       }
+    } catch (error) {
+      console.error('Error during login:', error);
+      dispatch({ type: LOGIN_FAILURE, payload: 'An error occurred during login' });
+      return false;
+    }
   };
 };
+
 export const signup = (userData)=>{
   return async(dispatch)=>{
     try {
@@ -137,3 +139,8 @@ export const signup = (userData)=>{
     }
   }
 }
+export const logout = () => {
+  return {
+      type: LOGOUT,
+  };
+};
