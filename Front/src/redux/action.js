@@ -12,6 +12,7 @@ export const DELETE_EMPRESA = 'DELETE_EMPRESA';
 export const GET_EMPRESA_BY_NAME = 'GET_EMPRESA_BY_NAME';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
+export const POST_USER = 'POST_USER'
 
 
 export const getUsers = () => {
@@ -124,3 +125,14 @@ export const login = (username, password) => {
       }
   };
 };
+export const signup = (userData)=>{
+  return async(dispatch)=>{
+    try {
+      const response = await axios.post('http://localhost:3001/user',userData)
+      dispatch({type:POST_USER,payload:response.data})
+    } catch (error) {
+      console.error(`Error posting userData ${userData}:`, error);
+
+    }
+  }
+}

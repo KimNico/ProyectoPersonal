@@ -1,15 +1,21 @@
 import React, { useState } from "react";
-import { TextField, Button, Container, Typography, Box, IconButton } from "@mui/material";
+import { TextField, Button, Container, Typography, Box, IconButton, InputAdornment } from "@mui/material";
 import { Link } from "react-router-dom";
 import HomeIcon from '@mui/icons-material/Home';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 export const Signup = () => {
     const [formData, setFormData] = useState({
+        name: '',
+        surname: '',
         username: '',
         email: '',
         password: '',
         confirmPassword: ''
     });
+
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -23,6 +29,10 @@ export const Signup = () => {
         e.preventDefault();
         // Handle form submission logic here
         console.log(formData);
+    };
+
+    const handleClickShowPassword = () => {
+        setShowPassword(!showPassword);
     };
 
     return (
@@ -40,11 +50,35 @@ export const Signup = () => {
                         margin="normal"
                         required
                         fullWidth
+                        id="name"
+                        label="Name"
+                        name="name"
+                        autoComplete="name"
+                        autoFocus
+                        value={formData.name}
+                        onChange={handleChange}
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="surname"
+                        label="Surname"
+                        name="surname"
+                        autoComplete="surname"
+                        value={formData.surname}
+                        onChange={handleChange}
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
                         id="username"
                         label="Username"
                         name="username"
                         autoComplete="username"
-                        autoFocus
                         value={formData.username}
                         onChange={handleChange}
                     />
@@ -67,11 +101,23 @@ export const Signup = () => {
                         fullWidth
                         name="password"
                         label="Password"
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         id="password"
                         autoComplete="current-password"
                         value={formData.password}
                         onChange={handleChange}
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        onClick={handleClickShowPassword}
+                                        edge="end"
+                                    >
+                                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                                    </IconButton>
+                                </InputAdornment>
+                            ),
+                        }}
                     />
                     <TextField
                         variant="outlined"
@@ -80,10 +126,22 @@ export const Signup = () => {
                         fullWidth
                         name="confirmPassword"
                         label="Confirm Password"
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         id="confirmPassword"
                         value={formData.confirmPassword}
                         onChange={handleChange}
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        onClick={handleClickShowPassword}
+                                        edge="end"
+                                    >
+                                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                                    </IconButton>
+                                </InputAdornment>
+                            ),
+                        }}
                     />
                     <Button
                         type="submit"
