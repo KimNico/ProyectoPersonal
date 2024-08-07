@@ -28,7 +28,7 @@ const getUserByIDController = async (req, res) => {
 
 // Crear un nuevo User
 const postUserController = async (req, res) => {
-  const { nombre, apellido, pw, tipo, mail } = req.body;
+  const {nombre_usuario, nombre, apellido, pw, mail } = req.body;
   try {
     if (!nombre || !mail) {
       return res.status(400).json({ error: "Los parámetros 'nombre' y 'mail' son obligatorios." });
@@ -39,7 +39,7 @@ const postUserController = async (req, res) => {
       return res.status(409).json({ error: "Ya existe un usuario con este correo electrónico." });
     }
 
-    const user = await User.create({ nombre, apellido, pw, tipo, mail });
+    const user = await User.create({nombre_usuario, nombre, apellido, pw, mail });
     res.status(201).json({ message: 'Usuario creado exitosamente', user });
   } catch (error) {
     console.error('Error creating user:', error);
@@ -50,20 +50,17 @@ const postUserController = async (req, res) => {
 // Actualizar un User
 const putUserController = async (req, res) => {
   const { id } = req.params;
-  const { nombre, apellido, pw, tipo, mail, foto, cv } = req.body;
+  const {nombre_usuario, nombre, apellido, pw, mail } = req.body;
   try {
     const user = await User.findByPk(id);
     if (!user) {
       return res.status(404).json({ error: 'User no encontrado.' });
     }
-
+    user.nombre_usuario = nombre_usuario || user.nombre_usuario;
     user.nombre = nombre || user.nombre;
     user.apellido = apellido || user.apellido;
     user.pw = pw || user.pw;
-    user.tipo = tipo || user.tipo;
     user.mail = mail || user.mail;
-    user.foto = foto || user.foto;
-    user.cv = cv || user.cv;
 
     await user.save();
     res.status(200).json({ message: 'Usuario actualizado exitosamente', user });

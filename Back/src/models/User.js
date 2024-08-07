@@ -7,6 +7,10 @@ module.exports = (sequelize) => {
       primaryKey: true,
       autoIncrement: true,
     },
+    nombre_usuario:{
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     nombre: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -24,9 +28,5 @@ module.exports = (sequelize) => {
       allowNull: false,
       unique: true,
     },
-    tipo: {
-      type: DataTypes.ENUM('solicitante'),
-      allowNull: false,
-    }
   });
 };
