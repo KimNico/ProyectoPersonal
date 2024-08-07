@@ -9,7 +9,8 @@ import {
     DELETE_EMPRESA,
     DELETE_USER,
     LOGIN_SUCCESS,
-    LOGIN_FAILURE
+    LOGIN_FAILURE,
+    POST_USER
 } from "./action";
 
 const initialState = {
@@ -86,6 +87,11 @@ const rootReducer = (state = initialState, action) => {
                 currentUser: null,
                 loginError: action.payload,
             };
+            case POST_USER:
+                return{
+                    ...state,
+                    users: [...state.users, action.payload]
+                }
         default:
             return state;
     }

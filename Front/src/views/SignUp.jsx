@@ -1,18 +1,20 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { TextField, Button, Container, Typography, Box, IconButton, InputAdornment } from "@mui/material";
 import { Link } from "react-router-dom";
 import HomeIcon from '@mui/icons-material/Home';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { signup } from "../redux/action";
 
 export const Signup = () => {
+    const dispatch = useDispatch();
     const [formData, setFormData] = useState({
+        username: '',
         name: '',
         surname: '',
-        username: '',
         email: '',
         password: '',
-        confirmPassword: ''
     });
 
     const [showPassword, setShowPassword] = useState(false);
@@ -27,8 +29,16 @@ export const Signup = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Handle form submission logic here
-        console.log(formData);
+
+        // Basic validation
+        if (formData.password !== formData.confirmPassword) {
+            alert("Passwords do not match");
+            return;
+        }
+
+        // Dispatch the signup action with relevant fields
+        const { confirmPassword, ...signupData } = formData; // Exclude confirmPassword
+        dispatch(signup(signupData));
     };
 
     const handleClickShowPassword = () => {
@@ -50,11 +60,23 @@ export const Signup = () => {
                         margin="normal"
                         required
                         fullWidth
+                        id="username"
+                        label="Username"
+                        name="username"
+                        autoComplete="username"
+                        autoFocus
+                        value={formData.username}
+                        onChange={handleChange}
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
                         id="name"
                         label="Name"
                         name="name"
                         autoComplete="name"
-                        autoFocus
                         value={formData.name}
                         onChange={handleChange}
                     />
@@ -68,18 +90,6 @@ export const Signup = () => {
                         name="surname"
                         autoComplete="surname"
                         value={formData.surname}
-                        onChange={handleChange}
-                    />
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="username"
-                        label="Username"
-                        name="username"
-                        autoComplete="username"
-                        value={formData.username}
                         onChange={handleChange}
                     />
                     <TextField

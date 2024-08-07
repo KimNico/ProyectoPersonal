@@ -128,6 +128,7 @@ export const login = (username, password) => {
 export const signup = (userData)=>{
   return async(dispatch)=>{
     try {
+      console.log(userData)
       const response = await axios.post('http://localhost:3001/user',userData)
       dispatch({type:POST_USER,payload:response.data})
     } catch (error) {
