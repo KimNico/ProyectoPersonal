@@ -1,6 +1,6 @@
 const { DataTypes } = require("sequelize");
 
-module.exports = (sequelize) =>{
+module.exports = (sequelize) => {
     sequelize.define(
         "Empresa",
         {
@@ -8,35 +8,38 @@ module.exports = (sequelize) =>{
                 type: DataTypes.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
-              },
-              nombre_empresa: {
+            },
+            nombre_empresa: {
                 type: DataTypes.STRING,
                 allowNull: false,
-              },
-              descripcion: {
+            },
+            descripcion: {
                 type: DataTypes.TEXT,
                 allowNull: false,
-              },
-              cant_empleados:{
+            },
+            cant_empleados: {
                 type: DataTypes.INTEGER,
-                allowNull: false
-              },
-              mail:{
+                allowNull: false,
+            },
+            email: {
                 type: DataTypes.STRING,
-                allowNull:false
-              },
-              pw:{
-                type:DataTypes.STRING,
-                allowNull:false,
-              },
-              categoria:{
-                type:DataTypes.STRING,
-                allowNull:false,
-              },
-              telefono:{
-                type:DataTypes.STRING,
-                allowNull:false,
-              }
+                allowNull: false,
+            },
+            password: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            categoria: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            telefono: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            }
+        },
+        {
+            freezeTableName: true,
         }
-    )
-}
+    );
+};

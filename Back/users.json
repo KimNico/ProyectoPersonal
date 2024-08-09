@@ -3,56 +3,56 @@
         "id": 1,
         "nombre": "Juan",
         "apellido": "González",
-        "pw": "pw1",
-        "mail": "juan@example.com",
+        "password": "password1",
+        "email": "juan@example.com",
         "tipo": "solicitante"
     },
     {
         "id": 2,
         "nombre": "María",
         "apellido": "López",
-        "pw": "pw2",
-        "mail": "maria@example.com",
+        "password": "password2",
+        "email": "maria@example.com",
         "tipo": "solicitante"
     },
     {
         "id": 3,
         "nombre": "Pedro",
         "apellido": "Martínez",
-        "pw": "pw3",
-        "mail": "pedro@example.com",
+        "password": "password3",
+        "email": "pedro@example.com",
         "tipo": "solicitante"
     },
     {
         "id": 4,
         "nombre": "Ana",
         "apellido": "Rodríguez",
-        "pw": "pw4",
-        "mail": "ana@example.com",
+        "password": "password4",
+        "email": "ana@example.com",
         "tipo": "solicitante"
     },
     {
         "id": 5,
         "nombre": "Luis",
         "apellido": "Hernández",
-        "pw": "pw5",
-        "mail": "luis@example.com",
+        "password": "password5",
+        "email": "luis@example.com",
         "tipo": "solicitante"
     },
     {
         "id": 6,
         "nombre": "Laura",
         "apellido": "Gómez",
-        "pw": "pw6",
-        "mail": "laura@example.com",
+        "password": "password6",
+        "email": "laura@example.com",
         "tipo": "solicitante"
     },
     {
         "id": 7,
         "nombre": "Juana",
         "apellido": "Perez",
-        "pw": "pw7",
-        "mail": "juana@example.com",
+        "password": "password7",
+        "email": "juana@example.com",
         "tipo": "solicitante"
     }
 ]

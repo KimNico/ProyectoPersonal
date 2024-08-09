@@ -33,7 +33,7 @@ const postUserController = async (req, res) => {
   const { username, name, surname, password, email } = req.body;
   try {
     if (!name || !email) {
-      return res.status(400).json({ error: "Los parámetros 'nombre' y 'mail' son obligatorios." });
+      return res.status(400).json({ error: "Los parámetros 'nombre' y 'email' son obligatorios." });
     }
 
     const existingUser = await User.findOne({ where: { email } });

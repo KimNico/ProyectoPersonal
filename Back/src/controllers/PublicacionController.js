@@ -1,4 +1,4 @@
-const {Publicacion} = require ('../db')
+const {Publicacion,Empresa} = require ('../db')
 const getPublicacionesController = async (req,res) => {
   try{
     const publicaciones = await Publicacion.findAll();
@@ -31,7 +31,7 @@ const getPublicacionesController = async (req,res) => {
     try {
         const {id} = req.params;
         const publicacion = await Publicacion.findByPk(id);
-        if(!publicacion.length){
+        if(!publicacion){
             res.status(404).json({error:'Publicacion no encontrado'})
         }else{
             await publicacion.destroy()
@@ -43,17 +43,35 @@ const getPublicacionesController = async (req,res) => {
     console.log(error);
     }
   }
+  const postPublicacionController = async (req, res) => {
+    const { titulo, descripcion, ubicacion, requisitos, beneficios, modalidad, id_empresa } = req.body;
+    
+    try {
+        // Verificar si la empresa con el id proporcionado existe
+        const empresa = await Empresa.findByPk(id_empresa);
+        if (!empresa) {
+            return res.status(404).json({ error: 'La empresa no existe' });
+        }
 
-  const postPublicacionController = async(req,res)=>{
-      const {titulo, descripcion, ubicacion, salario} = req.body
-   try {
-    const publicacion = await Publicacion.create({titulo,descripcion,ubicacion,salario})
-    res.json("publicacion creado exitosamente")
-   } catch (error) {
-    res.status(500).json({error:'Hubo un error al cargar la publicacion'})
-    console.log(error);
-   }
-  }
+        // Crear la publicación con el id_empresa asociado
+        const publicacion = await Publicacion.create({
+            titulo,
+            descripcion,
+            ubicacion,
+            requisitos, // Debe ser un objeto JSON
+            beneficios, // Debe ser un objeto JSON
+            modalidad,
+            id_empresa // Agregamos el id_empresa al crear la publicación
+        });
+
+        res.json("Publicación creada exitosamente");
+    } catch (error) {
+        res.status(500).json({ error: 'Hubo un error al crear la publicación' });
+        console.log(error);
+    }
+};
+
+
 
   const putPublicacionController = async (req,res)=>{
     try {

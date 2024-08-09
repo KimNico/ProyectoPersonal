@@ -26,20 +26,20 @@ const getEmpresaController = async (req,res) => {
   };
 
   const postEmpresaController = async (req, res) => {
-    const { nombre_empresa, descripcion, cant_empleados, mail, pw, categoria,telefono } = req.body;
+    const { nombre_empresa, descripcion, cant_empleados, email, password, categoria,telefono } = req.body;
   
     try {
-      if (!nombre_empresa || !mail) {
+      if (!nombre_empresa || !email) {
         return res.status(400).send("Parameters can't be null");
       }
   
       // Wait for the promise to resolve
-      let findMail = await Empresa.findAll({ where: { mail: mail } });
+      let findMail = await Empresa.findAll({ where: { email: email } });
   
       if (findMail.length) {
-        return res.status(409).send("Company already exists with this mail");
+        return res.status(409).send("Company already exists with this email");
       } else {
-        const empresa = await Empresa.create({ nombre_empresa, descripcion, cant_empleados, mail, pw, categoria,telefono });
+        const empresa = await Empresa.create({ nombre_empresa, descripcion, cant_empleados, email, password, categoria,telefono });
         return res.status(201).send({ empresa, message: "Company created successfully" });
       }
     } catch (error) {
@@ -50,7 +50,7 @@ const getEmpresaController = async (req,res) => {
 
   const putEmpresaController = async(req,res)=>{
     const { id } = req.params;
-    const { nombre_empresa, descripcion, cant_empleados, logo, mail, pw, categoria} = req.body;
+    const { nombre_empresa, descripcion, cant_empleados, logo, email, password, categoria} = req.body;
 try {
   const empresa = Empresa.findByPk(id)
   if(!empresa){
@@ -60,8 +60,8 @@ try {
     empresa.descripcion = descripcion
     empresa.cant_empleados = cant_empleados
     empresa.logo = logo
-    empresa.mail = mail
-    empresa.pw = pw
+    empresa.email = email
+    empresa.password = password
     empresa.categoria = categoria
     await empresa.save()
     res.json(empresa)
