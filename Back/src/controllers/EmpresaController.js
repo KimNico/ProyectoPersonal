@@ -50,7 +50,7 @@ const getEmpresaController = async (req,res) => {
 
   const putEmpresaController = async(req,res)=>{
     const { id } = req.params;
-    const { nombre_empresa, descripcion, cant_empleados, logo, mail, pw, industria} = req.body;
+    const { nombre_empresa, descripcion, cant_empleados, logo, mail, pw, categoria} = req.body;
 try {
   const empresa = Empresa.findByPk(id)
   if(!empresa){
