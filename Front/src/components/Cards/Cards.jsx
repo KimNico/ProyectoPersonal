@@ -23,7 +23,7 @@ export const Cards = ({ cardsData }) => {
                   Empleados: {empresa.cant_empleados}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  Email: {empresa.mail}
+                  Eemail: {empresa.email}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                   Categoría: {empresa.categoria}
