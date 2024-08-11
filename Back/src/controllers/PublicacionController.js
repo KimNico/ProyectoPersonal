@@ -14,7 +14,7 @@ const getPublicacionesController = async (req,res) => {
         const {id} =req.params
     try{
       const publicacion = await Publicacion.findByPk(id);
-      if(!publicacion.length){
+      if(!publicacion){
         res.status(404).json({error:'Publicacion no encontrado'})
       }else{
         res.json(publicacion)
