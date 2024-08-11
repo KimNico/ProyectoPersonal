@@ -1,22 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getEmpresas } from "../redux/action"; 
+import { getPublicaciones } from "../redux/action"; 
 import { NavBar } from "../components/NavBar/NavBar"; 
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
 import styles from './styles/Home.module.css'; 
 import { Cards } from "../components/Cards/Cards"; 
 
 export const Home = () => {
     const dispatch = useDispatch();
-    const empresas = useSelector(state => state.empresas); 
+    const publicacion = useSelector(state => state.publicaciones); 
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        dispatch(getEmpresas()); 
+        dispatch(getPublicaciones())
+            .finally(() => setLoading(false));
     }, [dispatch]);
-
-    console.log(empresas); 
 
     return (
         <div>
@@ -27,10 +28,14 @@ export const Home = () => {
                         <Typography variant="h2" component="h1" gutterBottom>
                             Welcome to My App
                         </Typography>
-                        {empresas && empresas.length > 0 ? (
-                            <Cards cardsData={empresas} /> // Render Cards component if empresas data is available
+                        {loading ? (
+                            <Box display="flex" justifyContent="center" my={4}>
+                                <CircularProgress />
+                            </Box>
+                        ) : publicacion && publicacion.length > 0 ? (
+                            <Cards cardsData={publicacion} /> 
                         ) : (
-                            <Typography>No empresas found.</Typography> // Message if no empresas data
+                            <Typography>No publicaciones found.</Typography>
                         )}
                     </Box>
                 </Container>

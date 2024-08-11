@@ -1,9 +1,12 @@
 .mainContent {
     padding: 20px;
-}
-
-.footer {
-    padding: 10px;
-    background-color: #f1f1f1;
-    text-align: center;
-}
+    background-color: #f5f5f5;
+  }
+  
+  .footer {
+    margin-top: auto;
+    padding: 20px 0;
+    background-color: #222;
+    color: #fff;
+  }
+  

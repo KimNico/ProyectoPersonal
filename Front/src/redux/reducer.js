@@ -2,7 +2,7 @@ import {
     GET_EMPRESA,
     GET_USERS,
     GET_PUBLICACIONES,
-    GET_EMPLEOS_BY_ID,
+    GET_PUBLICACIONES_BY_ID,
     GET_EMPRESA_BY_ID,
     GET_USERS_BY_ID,
     DELETE_EMPLEO,
@@ -40,13 +40,13 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 publicaciones: action.payload,
             };
-        case GET_EMPLEOS_BY_ID:
-            return {
-                ...state,
-                publicaciones: state.publicaciones.map(pub =>
-                    pub.id === action.payload.id ? action.payload : pub
-                ),
-            };
+            case GET_PUBLICACIONES_BY_ID:
+                return {
+                    ...state,
+                    publicaciones: state.publicaciones.map(pub =>
+                        pub.id === action.payload.id ? action.payload : pub
+                    ),
+                };
         case GET_EMPRESA_BY_ID:
             return {
                 ...state,

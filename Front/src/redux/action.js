@@ -3,7 +3,7 @@ import axios from 'axios';
 export const GET_EMPRESA = 'GET_EMPRESA';
 export const GET_PUBLICACIONES = 'GET_PUBLICACIONES';
 export const GET_USERS = 'GET_USERS';
-export const GET_EMPLEOS_BY_ID = 'GET_EMPLEOS_BY_ID';
+export const GET_PUBLICACIONES_BY_ID = 'GET_PUBLICACIONES_BY_ID';
 export const GET_USERS_BY_ID = 'GET_USERS_BY_ID';
 export const GET_EMPRESA_BY_ID = 'GET_EMPRESA_BY_ID';
 export const DELETE_EMPLEO = 'DELETE_EMPLEO';
@@ -66,7 +66,7 @@ export const getEmpresaById = (id) => {
 export const getPublicaciones = () => {
     return async (dispatch) => {
         try {
-            const response = await axios.get('http://localhost:3001/publicaciones');
+            const response = await axios.get('http://localhost:3001/publicacion');
             dispatch({ type: GET_PUBLICACIONES, payload: response.data });
         } catch (error) {
             console.error('Error fetching publicaciones:', error);
@@ -76,15 +76,16 @@ export const getPublicaciones = () => {
 };
 
 export const getPublicacionesById = (id) => {
-    return async (dispatch) => {
-        try {
-            const response = await axios.get(`http://localhost:3001/publicaciones/${id}`);
-            dispatch({ type: GET_PUBLICACIONES, payload: response.data });
-        } catch (error) {
-            console.error(`Error fetching publicaciones with id ${id}:`, error);
-        }
-    };
+  return async (dispatch) => {
+      try {
+          const response = await axios.get(`http://localhost:3001/publicacion/${id}`);
+          dispatch({ type: GET_PUBLICACIONES_BY_ID, payload: response.data });
+      } catch (error) {
+          console.error(`Error fetching publicaciones with id ${id}:`, error);
+      }
+  };
 };
+
 
 export const deleteEmpresa = (id) => {
     return async (dispatch) => {
