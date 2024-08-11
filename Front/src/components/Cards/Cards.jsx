@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import { Link } from 'react-router-dom';
 import { CardActionArea } from '@mui/material';
-import styles from './Card.module.css'; // adjust the path as needed
+import styles from './Card.module.css'; 
 
 export const Cards = ({ cardsData }) => {
   return (

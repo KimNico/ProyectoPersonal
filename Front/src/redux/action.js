@@ -79,12 +79,14 @@ export const getPublicacionesById = (id) => {
   return async (dispatch) => {
       try {
           const response = await axios.get(`http://localhost:3001/publicacion/${id}`);
+          console.log('Response data:', response.data); // Verifica la estructura de los datos
           dispatch({ type: GET_PUBLICACIONES_BY_ID, payload: response.data });
       } catch (error) {
           console.error(`Error fetching publicaciones with id ${id}:`, error);
       }
   };
 };
+
 
 
 export const deleteEmpresa = (id) => {

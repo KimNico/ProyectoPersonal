@@ -12,6 +12,7 @@ import { Cards } from "../components/Cards/Cards";
 export const Home = () => {
     const dispatch = useDispatch();
     const publicacion = useSelector(state => state.publicaciones); 
+    console.log(publicacion);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {

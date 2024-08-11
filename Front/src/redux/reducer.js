@@ -19,6 +19,7 @@ const initialState = {
     publicaciones: [],
     empresas: [],
     saved: [],
+    publicacion_details:{},
     currentUser: null,
     loginError: null,
 };
@@ -40,13 +41,13 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 publicaciones: action.payload,
             };
-            case GET_PUBLICACIONES_BY_ID:
-                return {
-                    ...state,
-                    publicaciones: state.publicaciones.map(pub =>
-                        pub.id === action.payload.id ? action.payload : pub
-                    ),
-                };
+        case GET_PUBLICACIONES_BY_ID:
+            return {
+                ...state,
+                publicacion_details: action.payload,
+                
+            };
+            
         case GET_EMPRESA_BY_ID:
             return {
                 ...state,
