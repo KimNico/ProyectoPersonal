@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { TextField, Button, Container, Typography, Box, IconButton, InputAdornment } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import HomeIcon from '@mui/icons-material/Home';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -9,12 +9,14 @@ import { signup } from "../redux/action";
 
 export const Signup = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate(); // Initialize useNavigate
     const [formData, setFormData] = useState({
         username: '',
         name: '',
         surname: '',
         email: '',
         password: '',
+        confirmPassword: '', // Add confirmPassword to formData
     });
 
     const [showPassword, setShowPassword] = useState(false);
@@ -39,6 +41,9 @@ export const Signup = () => {
         // Dispatch the signup action with relevant fields
         const { confirmPassword, ...signupData } = formData; // Exclude confirmPassword
         dispatch(signup(signupData));
+
+        // Redirect to home after successful signup
+        navigate("/");
     };
 
     const handleClickShowPassword = () => {
