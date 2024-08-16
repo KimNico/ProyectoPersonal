@@ -8,17 +8,28 @@ import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import styles from './styles/Home.module.css'; 
 import { Cards } from "../components/Cards/Cards"; 
+import { Paginador } from "../components/Paginador/Paginador";
 
 export const Home = () => {
     const dispatch = useDispatch();
-    const publicacion = useSelector(state => state.publicaciones); 
-    console.log(publicacion);
+    const publicaciones = useSelector(state => state.publicaciones); 
     const [loading, setLoading] = useState(true);
+    const [paginaActual, setPaginaActual] = useState(1);
+    const publicacionesPorPagina = 10; // Número de publicaciones por página
 
     useEffect(() => {
         dispatch(getPublicaciones())
             .finally(() => setLoading(false));
     }, [dispatch]);
+
+    // Calcular las publicaciones a mostrar según la página actual
+    const indiceUltimaPublicacion = paginaActual * publicacionesPorPagina;
+    const indicePrimeraPublicacion = indiceUltimaPublicacion - publicacionesPorPagina;
+    const publicacionesActuales = publicaciones.slice(indicePrimeraPublicacion, indiceUltimaPublicacion);
+
+    const handleChangePagina = (nuevaPagina) => {
+        setPaginaActual(nuevaPagina);
+    };
 
     return (
         <div>
@@ -33,8 +44,17 @@ export const Home = () => {
                             <Box display="flex" justifyContent="center" my={4}>
                                 <CircularProgress />
                             </Box>
-                        ) : publicacion && publicacion.length > 0 ? (
-                            <Cards cardsData={publicacion} /> 
+                        ) : publicacionesActuales && publicacionesActuales.length > 0 ? (
+                            <>
+                                <Cards cardsData={publicacionesActuales} />
+                                <Box display="flex" justifyContent="center" my={4}>
+                                    <Paginador 
+                                        totalPaginas={Math.ceil(publicaciones.length / publicacionesPorPagina)} 
+                                        paginaActual={paginaActual} 
+                                        onCambiarPagina={handleChangePagina} 
+                                    />
+                                </Box>
+                            </>
                         ) : (
                             <Typography>No publicaciones found.</Typography>
                         )}
