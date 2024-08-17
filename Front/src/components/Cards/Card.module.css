@@ -40,7 +40,7 @@
 
 .save-button {
   color: #ff6b6b;
-  position: absolute;
+  position: absolute !important;
   bottom: 5px;
   right: 16px;
 }
