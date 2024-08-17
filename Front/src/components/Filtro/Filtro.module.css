@@ -1,0 +1,68 @@
+/* Filter.module.css */
+
+.filter-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Espacio entre los campos de filtro */
+    margin-bottom: 20px; /* Espacio inferior para separar el filtro del contenido */
+  }
+  
+  .filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px; /* Espacio entre los elementos del grupo de filtros */
+  }
+  
+  .filter-label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333; /* Color del texto */
+    margin-bottom: 8px;
+  }
+  
+  .filter-input {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc; /* Borde gris claro */
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .filter-input:focus {
+    border-color: #1976d2; /* Cambia el borde al color primario de Material-UI cuando está en foco */
+    outline: none;
+  }
+  
+  .filter-button {
+    padding: 10px 16px;
+    font-size: 14px;
+    color: white;
+    background-color: #1976d2; /* Color de fondo primario de Material-UI */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .filter-button:hover {
+    background-color: #155a9b; /* Oscurecer el color al pasar el mouse */
+  }
+  
+  .filter-clear-button {
+    padding: 10px 16px;
+    font-size: 14px;
+    color: #1976d2; /* Color del texto */
+    background-color: transparent;
+    border: 1px solid #1976d2; /* Borde del color primario */
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-left: 8px; /* Espacio entre los botones */
+  }
+  
+  .filter-clear-button:hover {
+    background-color: #1976d2; /* Cambiar color de fondo al pasar el mouse */
+    color: white; /* Cambiar color de texto al pasar el mouse */
+  }
+  

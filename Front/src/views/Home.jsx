@@ -9,12 +9,14 @@ import CircularProgress from '@mui/material/CircularProgress';
 import styles from './styles/Home.module.css'; 
 import { Cards } from "../components/Cards/Cards"; 
 import { Paginador } from "../components/Paginador/Paginador";
+import { Filtro } from "../components/Filtro/Filtro"; // Importa el componente de filtro
 
 export const Home = () => {
     const dispatch = useDispatch();
     const publicaciones = useSelector(state => state.publicaciones); 
     const [loading, setLoading] = useState(true);
     const [paginaActual, setPaginaActual] = useState(1);
+    const [filtros, setFiltros] = useState({ title: '', location: '' }); // Estado para los filtros
     const publicacionesPorPagina = 10; // Número de publicaciones por página
 
     useEffect(() => {
@@ -22,13 +24,24 @@ export const Home = () => {
             .finally(() => setLoading(false));
     }, [dispatch]);
 
+    // Filtrar publicaciones según los filtros aplicados
+    const publicacionesFiltradas = publicaciones.filter(publicacion => 
+        publicacion.titulo.toLowerCase().includes(filtros.title.toLowerCase()) &&
+        publicacion.ubicacion.toLowerCase().includes(filtros.location.toLowerCase())
+    );
+
     // Calcular las publicaciones a mostrar según la página actual
     const indiceUltimaPublicacion = paginaActual * publicacionesPorPagina;
     const indicePrimeraPublicacion = indiceUltimaPublicacion - publicacionesPorPagina;
-    const publicacionesActuales = publicaciones.slice(indicePrimeraPublicacion, indiceUltimaPublicacion);
+    const publicacionesActuales = publicacionesFiltradas.slice(indicePrimeraPublicacion, indiceUltimaPublicacion);
 
     const handleChangePagina = (nuevaPagina) => {
         setPaginaActual(nuevaPagina);
+    };
+
+    const handleFilterChange = (newFilters) => {
+        setFiltros(newFilters);
+        setPaginaActual(1); // Reiniciar a la primera página al aplicar nuevos filtros
     };
 
     return (
@@ -40,6 +53,7 @@ export const Home = () => {
                         <Typography variant="h2" component="h1" gutterBottom>
                             Welcome to My App
                         </Typography>
+                        <Filtro onFilter={handleFilterChange} />
                         {loading ? (
                             <Box display="flex" justifyContent="center" my={4}>
                                 <CircularProgress />
@@ -49,7 +63,7 @@ export const Home = () => {
                                 <Cards cardsData={publicacionesActuales} />
                                 <Box display="flex" justifyContent="center" my={4}>
                                     <Paginador 
-                                        totalPaginas={Math.ceil(publicaciones.length / publicacionesPorPagina)} 
+                                        totalPaginas={Math.ceil(publicacionesFiltradas.length / publicacionesPorPagina)} 
                                         paginaActual={paginaActual} 
                                         onCambiarPagina={handleChangePagina} 
                                     />
