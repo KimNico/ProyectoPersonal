@@ -1,55 +1,43 @@
 .container {
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-    background-color: #fdfdfd;
-  }
-  
-  .paper {
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
-  }
-  
-  .title {
-    font-size: 2.5rem;
-    margin-bottom: 25px;
-    color: #212121;
-    font-weight: 700;
-    border-bottom: 3px solid #3f51b5;
-    padding-bottom: 15px;
-  }
-  
-  .paper-section {
-    margin-bottom: 30px;
-    padding: 20px;
-    border-radius: 12px;
-    background-color: #fafafa;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .section-title {
-    font-size: 1.8rem;
-    color: #3f51b5;
-    margin-bottom: 15px;
-    font-weight: 600;
-  }
-  
-  .list {
-    margin-left: 30px;
-    padding-left: 0;
-    list-style-type: disc;
-    font-size: 1rem;
-    color: #616161;
-  }
-  
-  .error {
-    text-align: center;
-    font-size: 1.5rem;
-    color: #d32f2f;
-    margin-top: 60px;
-  }
-  
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.cardHeader {
+  background-color: #f5f5f5;
+  padding: 16px;
+  border-radius: 8px 8px 0 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.divider {
+  margin: 20px 0;
+}
+
+.sectionBox {
+  background-color: #f9f9f9;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.list {
+  padding-left: 16px;
+}
+
+.listItem {
+  padding-left: 0;
+  margin-bottom: 8px;
+}
+
+.error {
+  text-align: center;
+  padding: 50px 20px;
+}
