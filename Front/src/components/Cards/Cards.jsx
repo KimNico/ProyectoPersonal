@@ -17,25 +17,39 @@ export const Cards = ({ cardsData, onSave }) => {
   }
 
   return (
-    <Grid container spacing={2} direction="column">
+    <Grid container spacing={3} direction="column" justifyContent="center">
       {cardsData.map((publicacion) => (
-        <Grid item xs={12} key={publicacion.id_trabajo}>
+        <Grid item xs={12} sm={8} md={6} lg={4} key={publicacion.id_trabajo}>
           <CardActionArea 
             component={Link} 
             to={`/publicacion/${publicacion.id_trabajo}`}
           >
-            <Card className={styles['card-container']} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-              <CardContent className={styles['card-content']}>
-                <Typography variant="h6" component="div" className={styles['card-title']}>
-                  {publicacion.titulo}
-                </Typography>
-                <Typography variant="body2" className={styles['card-text']}>
-                  <strong>Ubicación:</strong> {publicacion.ubicacion}
-                </Typography>
-                <Typography variant="body2" className={styles['card-text']}>
-                  <strong>Modalidad:</strong> {publicacion.modalidad}
-                </Typography>
-              </CardContent>
+            <Card className={styles['card-container']}>
+              <div className={styles['card-inner-container']}>
+                <div className={styles['card-left-side']}>
+                  <CardContent className={styles['card-content']}>
+                    <Typography variant="body2" className={styles['card-text-title']}>
+                      <strong>{publicacion.Empresa?.nombre_empresa}</strong>
+                    </Typography>
+                    <Typography variant="h6" component="div" className={styles['card-title']}>
+                      {publicacion.titulo}
+                    </Typography>
+                    <Typography variant="body2" className={styles['card-text']}>
+                      {publicacion.descripcion}
+                    </Typography>
+                  </CardContent>
+                </div>
+                <div className={styles['card-right-side']}>
+                  <CardContent className={styles['card-content']}>
+                    <Typography variant="body2" className={styles['card-text']}>
+                      <strong>Ubicación:</strong> {publicacion.ubicacion}
+                    </Typography>
+                    <Typography variant="body2" className={styles['card-text']}>
+                      <strong>Modalidad:</strong> {publicacion.modalidad}
+                    </Typography>
+                  </CardContent>
+                </div>
+              </div>
               <IconButton 
                 className={styles['save-button']}
                 onClick={(e) => {

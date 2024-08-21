@@ -1,21 +1,63 @@
 .card-container {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  position: relative; /* Necesario para el posicionamiento absoluto del botón */
+  margin: 0px; /* Reduce el margen para el espaciado */
+  overflow: hidden; /* Evita el desbordamiento del contenido */
+  max-height: 120px; /* Ajusta la altura máxima según sea necesario */
+  border: 1px solid #ddd; /* Opcional: Agrega un borde para mejor visibilidad */
+  border-radius: 8px; /* Opcional: Redondea las esquinas */
+  padding: 0px !important;
+  align-items: center;
+}
+
+.card-inner-container {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+.card-left-side {
+  flex: 2; /* Ajusta el tamaño de la sección izquierda */
+  padding: 8px; /* Ajusta el padding */
+}
+
+.card-right-side {
+  flex: 1; /* Ajusta el tamaño de la sección derecha */
+  padding: 8px; /* Ajusta el padding */
+  border-left: 1px solid #ddd; /* Línea divisoria */
 }
 
 .card-content {
-  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  margin: -10px; /* Elimina márgenes adicionales */
 }
 
 .card-title {
-  font-size: 1.2rem;
+  font-size: 1.1rem; /* Reduce el tamaño de la fuente */
   font-weight: bold;
+  margin-bottom: 4px; /* Reduce el margen inferior */
 }
 
 .card-text {
-  margin-top: 8px;
+  font-size: 0.9rem; /* Reduce el tamaño de la fuente */
+  margin-top: 4px; /* Reduce el margen superior */
+}
+
+.card-text-title {
+  font-weight: bold;
+  font-size: 1.1rem; /* Reduce el tamaño de la fuente */
+  color: #1a73e8; /* Cambia el color del texto */
+  margin-bottom: 4px; /* Reduce el margen inferior */
 }
 
 .save-button {
+  width: 3%;
+  position: relative;
+  bottom:120px; /* Ajusta la posición vertical */
+  left:550px; /* Ajusta la posición horizontal */
   color: #ff4081; /* Cambia el color según tu preferencia */
+  z-index: 1; /* Asegura que el botón esté por encima del contenido */
+  transition: transform 0.3s; /* Transición suave para el botón */
 }

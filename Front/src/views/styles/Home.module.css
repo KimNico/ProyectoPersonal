@@ -1,12 +1,23 @@
+/* Ajusta el tamaño y los márgenes del contenedor principal */
 .mainContent {
-    padding: 20px;
-    background-color: #f5f5f5;
-  }
-  
-  .footer {
-    margin-top: auto;
-    padding: 20px 0;
-    background-color: #222;
-    color: #fff;
-  }
-  
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 16px; /* Espacio entre el filtro y las tarjetas */
+}
+
+/* Ajusta el contenedor del filtro */
+.filter-container {
+  flex: 1; /* Ocupa el 33% del espacio disponible, ajustable según necesidades */
+  min-width: 250px; /* Tamaño mínimo para el filtro */
+}
+
+/* Ajusta el contenedor de las tarjetas */
+.cards-container {
+  flex: 2; /* Ocupa el 67% del espacio disponible, ajustable según necesidades */
+}
+
+/* Estilo para los botones del filtro */
+.filter-clear-button {
+  margin-top: 16px; /* Espacio arriba del botón */
+}

@@ -13,10 +13,10 @@ import { Filtro } from "../components/Filtro/Filtro";
 
 export const Home = () => {
     const dispatch = useDispatch();
-    const publicaciones = useSelector(state => state.publicaciones); 
+    const publicaciones = useSelector(state => state.publicaciones || []); 
     const [loading, setLoading] = useState(true);
     const [paginaActual, setPaginaActual] = useState(1);
-    const [filtros, setFiltros] = useState({ title: '', location: '' }); 
+    const [filtros, setFiltros] = useState({ title: '', location: '', category: '', modality: '', date: '', area: '' }); 
     const publicacionesPorPagina = 10; 
 
     useEffect(() => {
@@ -25,8 +25,12 @@ export const Home = () => {
     }, [dispatch]);
 
     const publicacionesFiltradas = publicaciones.filter(publicacion => 
-        publicacion.titulo.toLowerCase().includes(filtros.title.toLowerCase()) &&
-        publicacion.ubicacion.toLowerCase().includes(filtros.location.toLowerCase())
+        (publicacion.titulo || '').toLowerCase().includes(filtros.title.toLowerCase()) &&
+        (publicacion.ubicacion || '').toLowerCase().includes(filtros.location.toLowerCase()) &&
+        (publicacion.categoria || '').toLowerCase().includes(filtros.category.toLowerCase()) &&
+        (publicacion.modalidad || '').toLowerCase().includes(filtros.modality.toLowerCase()) &&
+        (publicacion.fecha || '').toLowerCase().includes(filtros.date.toLowerCase()) &&
+        (publicacion.area || '').toLowerCase().includes(filtros.area.toLowerCase())
     );
 
     const indiceUltimaPublicacion = paginaActual * publicacionesPorPagina;
@@ -38,7 +42,14 @@ export const Home = () => {
     };
 
     const handleFilterChange = (newFilters) => {
-        setFiltros(newFilters);
+        setFiltros({
+            title: newFilters.title || '',
+            location: newFilters.location || '',
+            category: newFilters.category || '',
+            modality: newFilters.modality || '',
+            date: newFilters.date || '',
+            area: newFilters.area || ''
+        });
         setPaginaActual(1); 
     };
 
@@ -47,26 +58,32 @@ export const Home = () => {
             <NavBar />
             <main className={styles.mainContent}>
                 <Container>
-                    <Box my={4}>
-                        <Filtro onFilter={handleFilterChange} />
-                        {loading ? (
-                            <Box display="flex" justifyContent="center" my={4}>
-                                <CircularProgress />
-                            </Box>
-                        ) : publicacionesActuales && publicacionesActuales.length > 0 ? (
-                            <>
-                                <Cards cardsData={publicacionesActuales} />
+                    <Box display="flex" flexDirection="row" gap={2}>
+                        {/* Contenedor de filtros */}
+                        <Box className={styles['filter-container']}>
+                            <Filtro onFilter={handleFilterChange} />
+                        </Box>
+                        {/* Contenedor de tarjetas */}
+                        <Box className={styles['cards-container']}>
+                            {loading ? (
                                 <Box display="flex" justifyContent="center" my={4}>
-                                    <Paginador 
-                                        totalPaginas={Math.ceil(publicacionesFiltradas.length / publicacionesPorPagina)} 
-                                        paginaActual={paginaActual} 
-                                        onCambiarPagina={handleChangePagina} 
-                                    />
+                                    <CircularProgress />
                                 </Box>
-                            </>
-                        ) : (
-                            <Typography>No publicaciones found.</Typography>
-                        )}
+                            ) : publicacionesActuales && publicacionesActuales.length > 0 ? (
+                                <>
+                                    <Cards cardsData={publicacionesActuales} />
+                                    <Box display="flex" justifyContent="center" my={4}>
+                                        <Paginador 
+                                            totalPaginas={Math.ceil(publicacionesFiltradas.length / publicacionesPorPagina)} 
+                                            paginaActual={paginaActual} 
+                                            onCambiarPagina={handleChangePagina} 
+                                        />
+                                    </Box>
+                                </>
+                            ) : (
+                                <Typography>No publicaciones found.</Typography>
+                            )}
+                        </Box>
                     </Box>
                 </Container>
             </main>
