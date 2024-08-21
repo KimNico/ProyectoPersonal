@@ -7,31 +7,27 @@ import { Link } from 'react-router-dom';
 import { CardActionArea, IconButton } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite'; 
 import styles from './Card.module.css'; 
-import { useSelector } from 'react-redux'; // Asegúrate de importar useSelector
+import { useSelector } from 'react-redux';
 
 export const Cards = ({ cardsData, onSave }) => {
-  const currentUser = useSelector(state => state.currentUser); // Verifica el usuario actual
+  const currentUser = useSelector(state => state.currentUser);
 
   if (!cardsData || cardsData.length === 0) {
     return <Typography variant="body1">No hay publicaciones disponibles</Typography>;
   }
 
   return (
-    <Grid container spacing={3} justifyContent="center">
+    <Grid container spacing={2} direction="column">
       {cardsData.map((publicacion) => (
-        <Grid item xs={12} sm={6} md={4} lg={3} key={publicacion.id_trabajo} style={{ display: 'flex' }}>
+        <Grid item xs={12} key={publicacion.id_trabajo}>
           <CardActionArea 
             component={Link} 
-            to={`/publicacion/${publicacion.id_trabajo}`} 
-            style={{ display: 'flex', flexGrow: 1 }}
+            to={`/publicacion/${publicacion.id_trabajo}`}
           >
-            <Card className={styles['card-container']}>
+            <Card className={styles['card-container']} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
               <CardContent className={styles['card-content']}>
-                <Typography variant="h5" component="div" className={styles['card-title']}>
+                <Typography variant="h6" component="div" className={styles['card-title']}>
                   {publicacion.titulo}
-                </Typography>
-                <Typography variant="body2" className={styles['card-description']}>
-                  {publicacion.descripcion}
                 </Typography>
                 <Typography variant="body2" className={styles['card-text']}>
                   <strong>Ubicación:</strong> {publicacion.ubicacion}
@@ -48,7 +44,6 @@ export const Cards = ({ cardsData, onSave }) => {
                     onSave(publicacion);
                   } else {
                     console.log('Please log in to save items to favorites');
-                    // Optional: Redirect to login page or show a notification
                   }
                 }}
               >
