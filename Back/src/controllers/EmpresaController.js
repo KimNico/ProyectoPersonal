@@ -9,19 +9,21 @@ const getEmpresaController = async (req,res) => {
       console.log(error);
     }
   }
-  const getEmpresaByIdController = async (req,res)=>{
-    const {id} =req.params;
+  const getEmpresaByIdController = async (req, res) => {
+    const { id } = req.params;
     try {
-      const empresa = await findByPk(id)
-      if(!empresa.length){
-        res.status(404).json({error:'Empresa no encotrado'})
-      }else{
-        return empresa
+      // Buscar la empresa por su clave primaria (id)
+      const empresa = await Empresa.findByPk(id);
+      if (!empresa) {
+        // Si no se encuentra la empresa, devolver un error 404
+        return res.status(404).json({ error: 'Empresa no encontrada' });
       }
-      
+      // Si se encuentra la empresa, devolver los datos de la empresa
+      return res.json(empresa);
     } catch (error) {
-      res.status(500).json({ error: 'Error al cargar las empresas'});
-      console.log(error);
+      // Capturar cualquier error y devolver un error 500
+      res.status(500).json({ error: 'Error al cargar la empresa' });
+      console.error(error); // Imprimir el error en la consola para depuración
     }
   };
 

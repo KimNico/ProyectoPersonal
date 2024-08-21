@@ -9,23 +9,30 @@ const getPublicacionesController = async (req,res) => {
     console.log(error);
   }
   }
-
-  const getByIdPublicacionController = async (req,res) => {
-        const {id} =req.params
-    try{
-      const publicacion = await Publicacion.findByPk(id);
-      if(!publicacion){
-        res.status(404).json({error:'Publicacion no encontrado'})
-      }else{
-        res.json(publicacion)
+  const getByIdPublicacionController = async (req, res) => {
+    const { id } = req.params;
+    try {
+      const publicacion = await Publicacion.findByPk(id, {
+        include: [
+          {
+            model: Empresa,
+            attributes: ['nombre_empresa'],
+          },
+        ],
+      });
+      if (!publicacion) {
+        res.status(404).json({ error: 'Publicacion no encontrada' });
+      } else {
+        res.json(publicacion);
       }
-    }catch(error){
-      res.status(500).json({error:'Hubo un error al obetener las publicaciones'})
+    } catch (error) {
+      res.status(500).json({ error: 'Hubo un error al obtener la publicación' });
       console.log(error);
     }
-    }
-
-
+  };
+  
+  
+  
 
   const deletePublicacionController = async (req,res)=>{
     try {
