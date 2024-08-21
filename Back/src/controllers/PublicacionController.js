@@ -1,14 +1,20 @@
 const {Publicacion,Empresa} = require ('../db')
-const getPublicacionesController = async (req,res) => {
-  try{
-    const publicaciones = await Publicacion.findAll();
-    res.json(publicaciones)
-
-  }catch(error){
-    res.status(500).json({error:'Hubo un error al obetener las publicaciones'})
+const getPublicacionesController = async (req, res) => {
+  try {
+    // Incluye la relación con la empresa en la consulta
+    const publicaciones = await Publicacion.findAll({
+      include: [{
+        model: Empresa,
+        attributes: ['nombre_empresa'] // Solo selecciona el nombre de la empresa
+      }]
+    });
+    res.json(publicaciones);
+  } catch (error) {
+    res.status(500).json({ error: 'Hubo un error al obtener las publicaciones' });
     console.log(error);
   }
-  }
+};
+
   const getByIdPublicacionController = async (req, res) => {
     const { id } = req.params;
     try {
