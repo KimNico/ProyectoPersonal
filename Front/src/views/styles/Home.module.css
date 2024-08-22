@@ -1,15 +1,17 @@
 /* Ajusta el tamaño y los márgenes del contenedor principal */
 .mainContent {
+  margin-top:50px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  gap: 16px; /* Espacio entre el filtro y las tarjetas */
 }
 
 /* Ajusta el contenedor del filtro */
 .filter-container {
   flex: 1; /* Ocupa el 33% del espacio disponible, ajustable según necesidades */
-  min-width: 250px; /* Tamaño mínimo para el filtro */
+  min-width: 400px; /* Tamaño mínimo para el filtro */
+  margin-left:-160px;
+  margin-top:15px;
 }
 
 /* Ajusta el contenedor de las tarjetas */

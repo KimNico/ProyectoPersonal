@@ -4,7 +4,7 @@
   position: relative; /* Necesario para el posicionamiento absoluto del botón */
   margin: 0px; /* Reduce el margen para el espaciado */
   overflow: hidden; /* Evita el desbordamiento del contenido */
-  max-height: 120px; /* Ajusta la altura máxima según sea necesario */
+  max-height: 140px; /* Ajusta la altura máxima según sea necesario */
   border: 1px solid #ddd; /* Opcional: Agrega un borde para mejor visibilidad */
   border-radius: 8px; /* Opcional: Redondea las esquinas */
   padding: 0px !important;
@@ -15,6 +15,7 @@
   display: flex;
   flex-direction: row;
   align-items: stretch;
+  margin-bottom:10px;
 }
 
 .card-left-side {
@@ -31,7 +32,7 @@
 .card-content {
   display: flex;
   flex-direction: column;
-  margin: -10px; /* Elimina márgenes adicionales */
+  margin: 0px; /* Elimina márgenes adicionales */
 }
 
 .card-title {
@@ -41,15 +42,19 @@
 }
 
 .card-text {
-  font-size: 0.9rem; /* Reduce el tamaño de la fuente */
+  font-size: 0.7rem !important; /* Reduce el tamaño de la fuente */
+  margin-top: 4px; /* Reduce el margen superior */
+}
+.card-text-ubicacion,.card-text-modalidad {
+  font-size: 0.8rem !important; /* Reduce el tamaño de la fuente */
   margin-top: 4px; /* Reduce el margen superior */
 }
 
 .card-text-title {
   font-weight: bold;
-  font-size: 1.1rem; /* Reduce el tamaño de la fuente */
+  font-size: 1.4rem !important; /* Reduce el tamaño de la fuente */
   color: #1a73e8; /* Cambia el color del texto */
-  margin-bottom: 4px; /* Reduce el margen inferior */
+  margin-bottom: 0px !important; /* Reduce el margen inferior */
 }
 
 .save-button {

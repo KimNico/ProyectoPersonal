@@ -6,7 +6,7 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-import styles from './Filtro.module.css'; // Asegúrate de crear este archivo para estilizar el filtro
+import styles from './Filtro.module.css';
 
 export const Filtro = ({ onFilter }) => {
   const [title, setTitle] = useState('');
@@ -16,41 +16,37 @@ export const Filtro = ({ onFilter }) => {
   const [publicationDate, setPublicationDate] = useState('');
   const [area, setArea] = useState('');
 
-  // Opciones para los filtros desplegables
-  const locations = ['Ubicación 1', 'Ubicación 2', 'Ubicación 3']; // Reemplaza con tus opciones
-  const categories = ['Categoría 1', 'Categoría 2', 'Categoría 3']; // Reemplaza con tus opciones
-  const modalities = ['Modalidad 1', 'Modalidad 2', 'Modalidad 3']; // Reemplaza con tus opciones
-  const areas = ['Área 1', 'Área 2', 'Área 3']; // Reemplaza con tus opciones
+  const locations = ['Ubicación 1', 'Ubicación 2', 'Ubicación 3'];
+  const categories = ['Categoría 1', 'Categoría 2', 'Categoría 3'];
+  const modalities = ['Modalidad 1', 'Modalidad 2', 'Modalidad 3'];
+  const areas = ['Área 1', 'Área 2', 'Área 3'];
 
   useEffect(() => {
-    // Llama a la función de filtro cada vez que cambian los valores de los filtros
     onFilter({ title, location, category, modality, publicationDate, area });
   }, [title, location, category, modality, publicationDate, area, onFilter]);
 
   const handleClear = () => {
-    // Limpia los campos de texto
     setTitle('');
     setLocation('');
     setCategory('');
     setModality('');
     setPublicationDate('');
     setArea('');
-    // Llama a la función de filtro sin parámetros para mostrar todos los elementos
     onFilter({ title: '', location: '', category: '', modality: '', publicationDate: '', area: '' });
   };
 
   return (
     <Grid container spacing={2} className={styles['filter-container']}>
-      <Grid item xs={12} sm={6}>
+      <Grid item xs={12}>
         <TextField
           fullWidth
           label="Filtrar por título"
           variant="outlined"
           value={title}
-          onChange={(e) => setTitle(e.target.value)} // Aplica el filtro en tiempo real
+          onChange={(e) => setTitle(e.target.value)}
         />
       </Grid>
-      <Grid item xs={12} sm={6}>
+      <Grid item xs={12}>
         <FormControl fullWidth variant="outlined">
           <InputLabel>Ubicación</InputLabel>
           <Select
@@ -65,7 +61,7 @@ export const Filtro = ({ onFilter }) => {
           </Select>
         </FormControl>
       </Grid>
-      <Grid item xs={12} sm={6}>
+      <Grid item xs={12}>
         <FormControl fullWidth variant="outlined">
           <InputLabel>Categoría</InputLabel>
           <Select
@@ -80,7 +76,7 @@ export const Filtro = ({ onFilter }) => {
           </Select>
         </FormControl>
       </Grid>
-      <Grid item xs={12} sm={6}>
+      <Grid item xs={12}>
         <FormControl fullWidth variant="outlined">
           <InputLabel>Modalidad</InputLabel>
           <Select
@@ -95,7 +91,7 @@ export const Filtro = ({ onFilter }) => {
           </Select>
         </FormControl>
       </Grid>
-      <Grid item xs={12} sm={6}>
+      <Grid item xs={12}>
         <TextField
           fullWidth
           label="Filtrar por fecha de publicación"
@@ -103,10 +99,10 @@ export const Filtro = ({ onFilter }) => {
           variant="outlined"
           InputLabelProps={{ shrink: true }}
           value={publicationDate}
-          onChange={(e) => setPublicationDate(e.target.value)} // Aplica el filtro en tiempo real
+          onChange={(e) => setPublicationDate(e.target.value)}
         />
       </Grid>
-      <Grid item xs={12} sm={6}>
+      <Grid item xs={12}>
         <FormControl fullWidth variant="outlined">
           <InputLabel>Área</InputLabel>
           <Select
@@ -136,4 +132,3 @@ export const Filtro = ({ onFilter }) => {
 };
 
 export default Filtro;
-

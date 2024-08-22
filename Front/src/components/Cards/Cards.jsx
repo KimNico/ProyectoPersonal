@@ -28,11 +28,11 @@ export const Cards = ({ cardsData, onSave }) => {
               <div className={styles['card-inner-container']}>
                 <div className={styles['card-left-side']}>
                   <CardContent className={styles['card-content']}>
-                    <Typography variant="body2" className={styles['card-text-title']}>
-                      <strong>{publicacion.Empresa?.nombre_empresa}</strong>
-                    </Typography>
-                    <Typography variant="h6" component="div" className={styles['card-title']}>
+                    <Typography variant="h6" component="div" className={styles['card-text-title']}>
                       {publicacion.titulo}
+                    </Typography>
+                    <Typography variant="body2" className={styles['card-title']}>
+                      <strong>{publicacion.Empresa?.nombre_empresa}</strong>
                     </Typography>
                     <Typography variant="body2" className={styles['card-text']}>
                       {publicacion.descripcion}
@@ -41,10 +41,10 @@ export const Cards = ({ cardsData, onSave }) => {
                 </div>
                 <div className={styles['card-right-side']}>
                   <CardContent className={styles['card-content']}>
-                    <Typography variant="body2" className={styles['card-text']}>
+                    <Typography variant="body2" className={styles['card-text-ubicacion']}>
                       <strong>Ubicación:</strong> {publicacion.ubicacion}
                     </Typography>
-                    <Typography variant="body2" className={styles['card-text']}>
+                    <Typography variant="body2" className={styles['card-text-modalidad']}>
                       <strong>Modalidad:</strong> {publicacion.modalidad}
                     </Typography>
                   </CardContent>
