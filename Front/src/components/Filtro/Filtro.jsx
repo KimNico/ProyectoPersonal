@@ -10,9 +10,8 @@ import styles from './Filtro.module.css';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import CategoryIcon from '@mui/icons-material/Category';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
-import ClearIcon from '@mui/icons-material/Clear';
-import TitleIcon from '@mui/icons-material/Title';
+import EventIcon from '@mui/icons-material/Event';
+import BusinessIcon from '@mui/icons-material/Business';
 
 export const Filtro = ({ onFilter }) => {
   const [title, setTitle] = useState('');
@@ -51,9 +50,7 @@ export const Filtro = ({ onFilter }) => {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           InputProps={{
-            startAdornment: (
-              <TitleIcon className={styles.icon} />
-            ),
+            startAdornment: <WorkOutlineIcon style={{ marginRight: '8px' }} />
           }}
         />
       </Grid>
@@ -64,7 +61,7 @@ export const Filtro = ({ onFilter }) => {
             value={location}
             onChange={(e) => setLocation(e.target.value)}
             label="Ubicación"
-            startAdornment={<LocationOnIcon className={styles.icon} />}
+            startAdornment={<LocationOnIcon style={{ marginRight: '8px' }} />}
           >
             <MenuItem value=""><em>Seleccionar</em></MenuItem>
             {locations.map((loc, index) => (
@@ -80,7 +77,7 @@ export const Filtro = ({ onFilter }) => {
             value={category}
             onChange={(e) => setCategory(e.target.value)}
             label="Categoría"
-            startAdornment={<CategoryIcon className={styles.icon} />}
+            startAdornment={<CategoryIcon style={{ marginRight: '8px' }} />}
           >
             <MenuItem value=""><em>Seleccionar</em></MenuItem>
             {categories.map((cat, index) => (
@@ -96,7 +93,7 @@ export const Filtro = ({ onFilter }) => {
             value={modality}
             onChange={(e) => setModality(e.target.value)}
             label="Modalidad"
-            startAdornment={<WorkOutlineIcon className={styles.icon} />}
+            startAdornment={<BusinessIcon style={{ marginRight: '8px' }} />}
           >
             <MenuItem value=""><em>Seleccionar</em></MenuItem>
             {modalities.map((mod, index) => (
@@ -115,9 +112,7 @@ export const Filtro = ({ onFilter }) => {
           value={publicationDate}
           onChange={(e) => setPublicationDate(e.target.value)}
           InputProps={{
-            startAdornment: (
-              <CalendarTodayIcon className={styles.icon} />
-            ),
+            startAdornment: <EventIcon style={{ marginRight: '8px' }} />
           }}
         />
       </Grid>
@@ -128,7 +123,7 @@ export const Filtro = ({ onFilter }) => {
             value={area}
             onChange={(e) => setArea(e.target.value)}
             label="Área"
-            startAdornment={<WorkOutlineIcon className={styles.icon} />}
+            startAdornment={<WorkOutlineIcon style={{ marginRight: '8px' }} />}
           >
             <MenuItem value=""><em>Seleccionar</em></MenuItem>
             {areas.map((ar, index) => (
@@ -142,7 +137,6 @@ export const Filtro = ({ onFilter }) => {
           variant="outlined" 
           color="secondary" 
           onClick={handleClear}
-          startIcon={<ClearIcon />}
           className={styles['filter-clear-button']}
         >
           Limpiar Filtros
@@ -151,3 +145,5 @@ export const Filtro = ({ onFilter }) => {
     </Grid>
   );
 };
+
+export default Filtro;

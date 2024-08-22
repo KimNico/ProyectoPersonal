@@ -1,34 +1,33 @@
-/* Filtro.module.css */
-
 .filter-container {
   display: flex;
-  flex-direction: column; /* Asegura que los filtros estén en columna */
-  margin-bottom: 20px; /* Espacio inferior para separar el filtro del contenido */
-  border: 1px solid #ddd; /* Opcional: Agrega un borde para mejor visibilidad */
-  border-radius: 8px; /* Opcional: Redondea las esquinas */
-  padding:15px;
-  margin-top:0px
-}
-
-.filter-group {
-  display: flex;
-  flex-direction: column; /* Asegura que los elementos dentro del grupo de filtros estén en columna */
-  margin-right: 10px;
+  flex-direction: column;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-top: 0px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  background-color: #fff; /* Fondo blanco para destacar */
 }
 
 .filter-clear-button {
   padding: 10px 16px;
   font-size: 14px;
-  color: #1976d2; /* Color del texto */
+  color: #1976d2;
   background-color: transparent;
-  border: 1px solid #1976d2; /* Borde del color primario */
+  border: 1px solid #1976d2;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
-  margin-top: 15px; /* Espacio superior para separar el botón de los filtros */
+  margin-top: 15px;
+  align-self: center; /* Centra el botón de limpiar filtros */
 }
 
 .filter-clear-button:hover {
-  background-color: #1976d2; /* Cambiar color de fondo al pasar el mouse */
-  color: white; /* Cambiar color de texto al pasar el mouse */
+  background-color: #1976d2;
+  color: white;
 }
+.no-arrow .MuiSelect-icon {
+  display: none;
+}
+
