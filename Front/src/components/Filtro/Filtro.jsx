@@ -7,6 +7,12 @@ import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import styles from './Filtro.module.css';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import CategoryIcon from '@mui/icons-material/Category';
+import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import ClearIcon from '@mui/icons-material/Clear';
+import TitleIcon from '@mui/icons-material/Title';
 
 export const Filtro = ({ onFilter }) => {
   const [title, setTitle] = useState('');
@@ -44,6 +50,11 @@ export const Filtro = ({ onFilter }) => {
           variant="outlined"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          InputProps={{
+            startAdornment: (
+              <TitleIcon className={styles.icon} />
+            ),
+          }}
         />
       </Grid>
       <Grid item xs={12}>
@@ -53,6 +64,7 @@ export const Filtro = ({ onFilter }) => {
             value={location}
             onChange={(e) => setLocation(e.target.value)}
             label="Ubicación"
+            startAdornment={<LocationOnIcon className={styles.icon} />}
           >
             <MenuItem value=""><em>Seleccionar</em></MenuItem>
             {locations.map((loc, index) => (
@@ -68,6 +80,7 @@ export const Filtro = ({ onFilter }) => {
             value={category}
             onChange={(e) => setCategory(e.target.value)}
             label="Categoría"
+            startAdornment={<CategoryIcon className={styles.icon} />}
           >
             <MenuItem value=""><em>Seleccionar</em></MenuItem>
             {categories.map((cat, index) => (
@@ -83,6 +96,7 @@ export const Filtro = ({ onFilter }) => {
             value={modality}
             onChange={(e) => setModality(e.target.value)}
             label="Modalidad"
+            startAdornment={<WorkOutlineIcon className={styles.icon} />}
           >
             <MenuItem value=""><em>Seleccionar</em></MenuItem>
             {modalities.map((mod, index) => (
@@ -100,6 +114,11 @@ export const Filtro = ({ onFilter }) => {
           InputLabelProps={{ shrink: true }}
           value={publicationDate}
           onChange={(e) => setPublicationDate(e.target.value)}
+          InputProps={{
+            startAdornment: (
+              <CalendarTodayIcon className={styles.icon} />
+            ),
+          }}
         />
       </Grid>
       <Grid item xs={12}>
@@ -109,6 +128,7 @@ export const Filtro = ({ onFilter }) => {
             value={area}
             onChange={(e) => setArea(e.target.value)}
             label="Área"
+            startAdornment={<WorkOutlineIcon className={styles.icon} />}
           >
             <MenuItem value=""><em>Seleccionar</em></MenuItem>
             {areas.map((ar, index) => (
@@ -122,6 +142,7 @@ export const Filtro = ({ onFilter }) => {
           variant="outlined" 
           color="secondary" 
           onClick={handleClear}
+          startIcon={<ClearIcon />}
           className={styles['filter-clear-button']}
         >
           Limpiar Filtros
@@ -130,5 +151,3 @@ export const Filtro = ({ onFilter }) => {
     </Grid>
   );
 };
-
-export default Filtro;

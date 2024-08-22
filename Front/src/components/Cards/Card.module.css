@@ -4,7 +4,7 @@
   position: relative; /* Necesario para el posicionamiento absoluto del botón */
   margin: 0px; /* Reduce el margen para el espaciado */
   overflow: hidden; /* Evita el desbordamiento del contenido */
-  max-height: 140px; /* Ajusta la altura máxima según sea necesario */
+  max-height: 110px; /* Ajusta la altura máxima según sea necesario */
   border: 1px solid #ddd; /* Opcional: Agrega un borde para mejor visibilidad */
   border-radius: 8px; /* Opcional: Redondea las esquinas */
   padding: 0px !important;
@@ -43,25 +43,33 @@
 
 .card-text {
   font-size: 0.7rem !important; /* Reduce el tamaño de la fuente */
-  margin-top: 4px; /* Reduce el margen superior */
+  margin-top: 0px !important; /* Reduce el margen superior */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .card-text-ubicacion,.card-text-modalidad {
   font-size: 0.8rem !important; /* Reduce el tamaño de la fuente */
-  margin-top: 4px; /* Reduce el margen superior */
+  margin-top: -10px; /* Reduce el margen superior */
 }
 
 .card-text-title {
   font-weight: bold;
   font-size: 1.4rem !important; /* Reduce el tamaño de la fuente */
   color: #1a73e8; /* Cambia el color del texto */
-  margin-bottom: 0px !important; /* Reduce el margen inferior */
+  margin-top: -20px !important; /* Reduce el margen inferior */
+  margin-bottom: -5px;
+
 }
 
 .save-button {
+  display: inline-flex;
   width: 3%;
   position: relative;
-  bottom:120px; /* Ajusta la posición vertical */
-  left:550px; /* Ajusta la posición horizontal */
+  bottom:130px; /* Ajusta la posición vertical */
+  left:405px; /* Ajusta la posición horizontal */
   color: #ff4081; /* Cambia el color según tu preferencia */
   z-index: 1; /* Asegura que el botón esté por encima del contenido */
   transition: transform 0.3s; /* Transición suave para el botón */
