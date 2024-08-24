@@ -49,6 +49,11 @@ export const JobDetail = () => {
                         subheader="Detalles del trabajo"
                         className={styles.cardHeader}
                     />
+                <CardHeader
+                        title={job.Empresa?.nombre_empresa}
+
+                        className={styles.cardHeader}
+                    />
                     <CardContent>
                         <Typography variant="body1" paragraph>
                             {job.descripcion}
