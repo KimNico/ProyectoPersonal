@@ -28,7 +28,7 @@ export const NavBar = () => {
                     <HomeIcon />
                 </IconButton>
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                    My App
+                    MiTrabajo
                 </Typography>
                 <Box className={styles.navLinks}>
                     {!currentUser ? (
