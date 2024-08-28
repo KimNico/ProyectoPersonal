@@ -4,6 +4,8 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  position: relative;
+  margin-left: 200px;
 }
 
 /* Ajusta el contenedor del filtro */

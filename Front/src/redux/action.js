@@ -31,7 +31,8 @@ export const getUsers = () => {
 export const getUser = (id) => {
     return async (dispatch) => {
         try {
-            const response = await axios.get(`/users/${id}`);
+            const response = await axios.get(`http://localhost:3001/user/${id}`);
+            console.log(response);
             dispatch({ type: GET_USERS_BY_ID, payload: response.data });
         } catch (error) {
             console.error(`Error fetching user with id ${id}:`, error);

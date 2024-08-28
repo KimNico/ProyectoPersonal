@@ -11,12 +11,13 @@ import Box from '@mui/material/Box';
 import styles from './NavBar.module.css';
 import { logout } from '../../redux/action'; 
 import { SearchBar } from './SearchBar/SearchBar';
+import { getUsers } from '../../redux/action';
 
 export const NavBar = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const currentUser = useSelector(state => state.currentUser);
-
+    console.log(currentUser);
     const handleLogout = () => {
         dispatch(logout());
     };
@@ -42,7 +43,7 @@ export const NavBar = () => {
                         </>
                     ) : (
                         <>
-                            <Button color="inherit" component={NavLink} to="/profile" className={styles.navLink}>
+                            <Button color="inherit" component={NavLink} to={`/profile/${currentUser.id_user}`} className={styles.navLink}>
                                 Profile
                             </Button>
                             <Button color="inherit" component={NavLink} to="/saved" className={styles.navLink}>

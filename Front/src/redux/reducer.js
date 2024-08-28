@@ -11,11 +11,12 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAILURE,
     POST_USER,
-    LOGOUT // Import the LOGOUT action type
+    LOGOUT,
 } from "./action";
 
 const initialState = {
     users: [],
+    user:{},
     publicaciones: [],
     empresas: [],
     saved: [],
@@ -30,6 +31,11 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 users: action.payload,
+            };
+        case GET_USERS_BY_ID:
+            return{
+                ...state,
+                user:action.payload,
             };
         case GET_EMPRESA:
             return {
@@ -53,13 +59,6 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 empresas: state.empresas.map(emp =>
                     emp.id === action.payload.id ? action.payload : emp
-                ),
-            };
-        case GET_USERS_BY_ID:
-            return {
-                ...state,
-                users: state.users.map(user =>
-                    user.id === action.payload.id ? action.payload : user
                 ),
             };
         case DELETE_EMPLEO:

@@ -72,7 +72,7 @@ export const Home = () => {
                             ) : publicacionesActuales && publicacionesActuales.length > 0 ? (
                                 <>
                                     <Cards cardsData={publicacionesActuales} />
-                                    <Box display="flex" justifyContent="center" my={4}>
+                                    <Box display="flex" justifyContent="center" position="relative" right="250px" my={4}>
                                         <Paginador 
                                             totalPaginas={Math.ceil(publicacionesFiltradas.length / publicacionesPorPagina)} 
                                             paginaActual={paginaActual} 
