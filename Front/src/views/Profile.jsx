@@ -19,13 +19,25 @@ export const Profile = ()=>{
     },[dispatch, id])
 
     return(
+        <>
+        <NavBar/>
       <Container>
         <Card>
             <CardHeader
             title={user.username}
             />
+              <CardHeader
+            title={user.email}
+            />
+              <CardHeader
+            title={user.name}
+            />
+              <CardHeader
+            title={user.surname}
+            />
         </Card>
 
       </Container>
+        </>
     )
 }
