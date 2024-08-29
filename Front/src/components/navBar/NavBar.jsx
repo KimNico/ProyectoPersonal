@@ -52,6 +52,9 @@ export const NavBar = () => {
                             <Button color="inherit" onClick={handleLogout} className={styles.navLink}>
                                 Logout
                             </Button>
+                            <Button color="inherit" component={NavLink} to={`/crearPublicacion`} className={styles.navLink}>
+                                Crear Publicacion
+                            </Button>
                         </>
                     )}
                 </Box>
